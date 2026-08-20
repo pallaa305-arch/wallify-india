@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wallify India — Free Aesthetic Wallpapers for Mobile & Desktop (2026)</title>
+<meta name="description" content="Free download aesthetic wallpapers for phone and desktop. Gradient, dark, minimal, nature styles. Made for Indian users. HD download.">
+<meta name="keywords" content="free wallpapers, aesthetic wallpaper, mobile wallpaper, desktop wallpaper, gradient wallpaper, dark wallpaper, Hindi wallpaper">
+<style>
+  :root{--bg:#0a0e1a;--card:#141a2e;--accent:#00d4aa;--accent2:#ff8a00;--txt:#fff;--mut:#9ab}
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',system-ui,sans-serif}
+  body{background:var(--bg);color:var(--txt);padding:20px}
+  header{text-align:center;padding:30px 10px 10px}
+  header h1{font-size:2.1rem;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  header p{color:var(--mut);margin-top:8px}
+  .cats{max-width:760px;margin:18px auto;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .cats button{padding:8px 16px;border-radius:20px;border:1px solid #2a2f55;background:#141a2e;color:var(--mut);cursor:pointer;font-size:.85rem}
+  .cats button.active,.cats button:hover{border-color:var(--accent);color:var(--accent)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;max-width:1100px;margin:20px auto}
+  .wp{background:var(--card);border:1px solid #2a2f55;border-radius:14px;overflow:hidden;transition:.2s}
+  .wp:hover{transform:translateY(-3px);border-color:var(--accent)}
+  .wp .prev{width:100%;aspect-ratio:9/16;display:block}
+  .wp .meta{padding:10px 12px;display:flex;justify-content:space-between;align-items:center}
+  .wp .meta span{font-size:.78rem;color:var(--mut)}
+  .wp .dl{padding:6px 12px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#000;border:none;border-radius:8px;font-weight:600;font-size:.78rem;cursor:pointer}
+  .ad{text-align:center;margin:20px auto;padding:14px;background:#141a2e;border:1px dashed #2a2f55;border-radius:10px;color:var(--mut);font-size:.8rem;max-width:1100px}
+  footer{text-align:center;margin-top:40px;color:var(--mut);font-size:.85rem}
+</style>
+</head>
+<body>
+<header>
+  <h1>Wallify India</h1>
+  <p>Free aesthetic wallpapers for your phone & desktop 🇮🇳 · HD download, no signup</p>
+</header>
+
+<div class="cats" id="cats">
+  <button class="active" data-cat="all">All</button>
+  <button data-cat="gradient">Gradient</button>
+  <button data-cat="dark">Dark</button>
+  <button data-cat="minimal">Minimal</button>
+  <button data-cat="nature">Nature</button>
+  <button data-cat="abstract">Abstract</button>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<div class="ad">[ Advertisement space — AdSense banners load here ]</div>
+
+<footer>
+  <p>© 2026 Wallify India · All wallpapers generated, free to use</p>
+  <p>Made in Bharat for Bharat 🇮🇳</p>
+</footer>
+
+<script>
+// Each wallpaper is an SVG (tiny file, scalable, downloadable as PNG)
+const WALLS=[
+  {n:"Sunset Blush",c:"gradient",svg:g(`<linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff8a00"/><stop offset="1" stop-color="#ff2d7e"/></linearGradient>`)},
+  {n:"Ocean Deep",c:"gradient",svg:g(`<linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00d4aa"/><stop offset="1" stop-color="#0066ff"/></linearGradient>`)},
+  {n:"Midnight",c:"dark",svg:g(`<linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0a0e1a"/><stop offset="1" stop-color="#1a1f3e"/></linearGradient><circle cx="540" cy="400" r="120" fill="#fff" opacity="0.9"/><circle cx="500" cy="380" r="120" fill="#0a0e1a"/>`)},
+  {n:"Void",c:"dark",svg:g(`<radialGradient id="g" cx="0.5" cy="0.4"><stop offset="0" stop-color="#2a2f55"/><stop offset="1" stop-color="#05060f"/></radialGradient>`)},
+  {n:"Pure",c:"minimal",svg:g(`<rect width="1080" height="1920" fill="#f5f5f0"/><circle cx="540" cy="960" r="180" fill="#ff8a00"/>`)},
+  {n:"Line",c:"minimal",svg:g(`<rect width="1080" height="1920" fill="#ffffff"/><rect x="80" y="900" width="920" height="6" fill="#111"/>`)},
+  {n:"Forest",c:"nature",svg:g(`<linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#134e2e"/><stop offset="1" stop-color="#0a2618"/></linearGradient><circle cx="850" cy="300" r="90" fill="#fcd34d" opacity="0.8"/>`)},
+  {n:"Sky",c:"nature",svg:g(`<linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#87ceeb"/><stop offset="1" stop-color="#e0f7fa"/></linearGradient>`)},
+  {n:"Prism",c:"abstract",svg:g(`<linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c3aed"/><stop offset="0.5" stop-color="#db2777"/><stop offset="1" stop-color="#00d4aa"/></linearGradient><polygon points="540,200 800,960 280,960" fill="#fff" opacity="0.15"/>`)},
+  {n:"Neon Grid",c:"abstract",svg:g(`<rect width="1080" height="1920" fill="#0a0e1a"/>${gridLines()}`)}
+];
+function g(inner){return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1920" preserveAspectRatio="xMidYMid slice"><defs>${inner.includes('Gradient')?inner:''}</defs><rect width="1080" height="1920" fill="url(#g)"/>${inner.includes('Gradient')?'':inner}</svg>`;}
+function gridLines(){let s='';for(let i=0;i<1080;i+=60)s+=`<line x1="${i}" y1="0" x2="${i}" y2="1920" stroke="#00d4aa" stroke-opacity="0.15"/>`;for(let j=0;j<1920;j+=60)s+=`<line x1="0" y1="${j}" x2="1080" y2="${j}" stroke="#00d4aa" stroke-opacity="0.15"/>`;return s;}
+
+const grid=document.getElementById('grid');
+function render(cat){
+  const list=cat==='all'?WALLS:WALLS.filter(w=>w.c===cat);
+  grid.innerHTML=list.map((w,i)=>`
+    <div class="wp">
+      <img class="prev" src="data:image/svg+xml;utf8,${encodeURIComponent(w.svg)}" alt="${w.n}">
+      <div class="meta"><span>${w.n}</span><button class="dl" onclick="dl(${WALLS.indexOf(w)})">Download</button></div>
+    </div>`).join('');
+}
+function dl(i){
+  const w=WALLS[i];
+  const img=new Image();
+  const svg64='data:image/svg+xml;utf8,'+encodeURIComponent(w.svg);
+  img.onload=()=>{
+    const c=document.createElement('canvas');c.width=1080;c.height=1920;
+    const x=c.getContext('2d');x.drawImage(img,0,0,1080,1920);
+    const a=document.createElement('a');a.download=w.n.replace(/\s+/g,'_')+'.png';a.href=c.toDataURL('image/png');a.click();
+  };
+  img.src=svg64;
+}
+// category buttons
+document.getElementById('cats').addEventListener('click',e=>{
+  if(e.target.tagName==='BUTTON'){
+    document.querySelectorAll('#cats button').forEach(b=>b.classList.remove('active'));
+    e.target.classList.add('active');
+    render(e.target.dataset.cat);
+  }
+});
+render('all');
+</script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: wallify-india
+    runtime: static
+    buildCommand: ""
+    staticPublishPath: "public"
+    pullRequestPreviewsEnabled: false
