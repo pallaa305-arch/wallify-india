@@ -3,100 +3,161 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wallify India — Free Aesthetic Wallpapers for Mobile & Desktop (2026)</title>
-<meta name="description" content="Free download aesthetic wallpapers for phone and desktop. Gradient, dark, minimal, nature styles. Made for Indian users. HD download.">
-<meta name="keywords" content="free wallpapers, aesthetic wallpaper, mobile wallpaper, desktop wallpaper, gradient wallpaper, dark wallpaper, Hindi wallpaper">
+<title>Wallify India — 100+ Free HD Wallpapers for Phone & Desktop</title>
+<meta name="description" content="Download 100+ free HD wallpapers for Android & iPhone. Gradient, dark, minimal, abstract, nature, neon, geometric styles. No signup, instant download.">
+<meta name="keywords" content="free wallpapers, hd wallpaper download, phone wallpaper, mobile wallpaper, desktop wallpaper, gradient wallpaper, dark wallpaper, aesthetic wallpaper, India">
+<meta property="og:title" content="Wallify India — 100+ Free HD Wallpapers">
+<meta property="og:description" content="Free aesthetic wallpapers for your phone. Instant download, no signup.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#0a0e1a;--card:#141a2e;--accent:#00d4aa;--accent2:#ff8a00;--txt:#fff;--mut:#9ab}
-  *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',system-ui,sans-serif}
-  body{background:var(--bg);color:var(--txt);padding:20px}
-  header{text-align:center;padding:30px 10px 10px}
-  header h1{font-size:2.1rem;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
-  header p{color:var(--mut);margin-top:8px}
-  .cats{max-width:760px;margin:18px auto;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
-  .cats button{padding:8px 16px;border-radius:20px;border:1px solid #2a2f55;background:#141a2e;color:var(--mut);cursor:pointer;font-size:.85rem}
-  .cats button.active,.cats button:hover{border-color:var(--accent);color:var(--accent)}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;max-width:1100px;margin:20px auto}
-  .wp{background:var(--card);border:1px solid #2a2f55;border-radius:14px;overflow:hidden;transition:.2s}
-  .wp:hover{transform:translateY(-3px);border-color:var(--accent)}
-  .wp .prev{width:100%;aspect-ratio:9/16;display:block}
-  .wp .meta{padding:10px 12px;display:flex;justify-content:space-between;align-items:center}
-  .wp .meta span{font-size:.78rem;color:var(--mut)}
-  .wp .dl{padding:6px 12px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#000;border:none;border-radius:8px;font-weight:600;font-size:.78rem;cursor:pointer}
-  .ad{text-align:center;margin:20px auto;padding:14px;background:#141a2e;border:1px dashed #2a2f55;border-radius:10px;color:var(--mut);font-size:.8rem;max-width:1100px}
-  footer{text-align:center;margin-top:40px;color:var(--mut);font-size:.85rem}
+  :root{
+    --bg:#080a14;--bg2:#0d1020;--card:#12162a;--line:#1f2540;
+    --txt:#eef1ff;--mut:#8b93b8;--accent:#00d4aa;--accent2:#ff8a00;
+    --grad:linear-gradient(135deg,#00d4aa,#7c3aed 50%,#ff8a00);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--txt);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  h1,h2,h3,.logo{font-family:'Space Grotesk',sans-serif}
+  a{color:inherit;text-decoration:none}
+  /* Nav */
+  nav{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;position:sticky;top:0;z-index:30;background:rgba(8,10,20,.8);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .logo{font-size:1.4rem;font-weight:700;display:flex;align-items:center;gap:8px}
+  .logo .dot{width:12px;height:12px;border-radius:50%;background:var(--grad)}
+  .nav-links{display:flex;gap:22px;color:var(--mut);font-size:.92rem}
+  .nav-links a:hover{color:var(--accent)}
+  /* Hero */
+  header.hero{text-align:center;padding:70px 20px 50px;position:relative}
+  header.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 300px at 50% 0%,rgba(124,58,237,.25),transparent);pointer-events:none}
+  .hero h1{font-size:clamp(2.2rem,6vw,3.8rem);line-height:1.1;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{color:var(--mut);max-width:560px;margin:18px auto 0;font-size:1.05rem}
+  .stats{display:flex;gap:30px;justify-content:center;margin-top:28px;flex-wrap:wrap}
+  .stat b{font-size:1.6rem;color:var(--accent)}
+  .stat span{display:block;color:var(--mut);font-size:.8rem}
+  .cta{display:inline-block;margin-top:30px;padding:14px 30px;border-radius:12px;background:var(--grad);color:#080a14;font-weight:700;font-size:1rem;transition:.2s}
+  .cta:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(124,58,237,.4)}
+  /* Search + cats */
+  .controls{max-width:1100px;margin:0 auto;padding:0 20px}
+  .search{position:relative;margin-bottom:18px}
+  .search input{width:100%;padding:15px 20px 15px 48px;border-radius:14px;border:1px solid var(--line);background:var(--bg2);color:var(--txt);font-size:1rem;outline:none}
+  .search input:focus{border-color:var(--accent)}
+  .search svg{position:absolute;left:16px;top:50%;transform:translateY(-50%);opacity:.5}
+  .cats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px}
+  .cats button{padding:9px 18px;border-radius:22px;border:1px solid var(--line);background:var(--bg2);color:var(--mut);cursor:pointer;font-size:.88rem;transition:.18s}
+  .cats button.active,.cats button:hover{border-color:var(--accent);color:var(--accent);background:#101a2e}
+  /* Grid */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:16px;max-width:1100px;margin:0 auto;padding:0 20px 40px}
+  .card{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:var(--card);cursor:pointer;transition:.22s;aspect-ratio:9/16}
+  .card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 14px 36px rgba(0,0,0,.5)}
+  .card img{width:100%;height:100%;object-fit:cover;display:block;max-width:100%}
+  .card .ov{position:absolute;inset:auto 0 0 0;padding:14px;background:linear-gradient(transparent,rgba(0,0,0,.85));opacity:0;transition:.22s}
+  .card:hover .ov{opacity:1}
+  .card .ov b{font-size:.92rem;display:block}
+  .card .ov small{color:var(--mut);font-size:.72rem;text-transform:uppercase;letter-spacing:1px}
+  .card .tag{position:absolute;top:10px;left:10px;background:rgba(0,0,0,.5);backdrop-filter:blur(6px);padding:4px 10px;border-radius:20px;font-size:.68rem;color:var(--accent)}
+  /* Lightbox */
+  .lb{position:fixed;inset:0;background:rgba(4,5,12,.92);display:none;align-items:center;justify-content:center;z-index:60;padding:20px;flex-direction:column}
+  .lb.open{display:flex}
+  .lb img{max-width:340px;width:90vw;max-height:70vh;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.7);object-fit:cover}
+  .lb .bar{margin-top:18px;display:flex;gap:14px;align-items:center}
+  .lb .bar b{font-size:1.05rem}
+  .lb .dl{padding:12px 26px;border-radius:10px;background:var(--grad);color:#080a14;font-weight:700;cursor:pointer;border:none;font-size:.95rem}
+  .lb .x{position:absolute;top:20px;right:26px;font-size:2rem;color:var(--mut);cursor:pointer;background:none;border:none}
+  /* Footer */
+  footer{text-align:center;padding:50px 20px;border-top:1px solid var(--line);color:var(--mut);font-size:.85rem}
+  footer a{color:var(--accent)}
+  .ad{text-align:center;margin:24px auto;max-width:1100px;padding:18px;background:var(--bg2);border:1px dashed var(--line);border-radius:12px;color:var(--mut);font-size:.8rem}
+  .loading{text-align:center;color:var(--mut);padding:40px}
 </style>
 </head>
 <body>
-<header>
-  <h1>Wallify India</h1>
-  <p>Free aesthetic wallpapers for your phone & desktop 🇮🇳 · HD download, no signup</p>
+<nav>
+  <div class="logo"><span class="dot"></span>Wallify<span style="color:var(--accent)">India</span></div>
+  <div class="nav-links"><a href="#gallery">Gallery</a><a href="#cats">Categories</a><a href="#" onclick="alert('Free forever 🇮🇳')">About</a></div>
+</nav>
+
+<header class="hero">
+  <h1>100+ Free HD Wallpapers</h1>
+  <p>Instant download for your phone & desktop. Gradient, dark, minimal, neon & more — generated fresh, no signup.</p>
+  <div class="stats">
+    <div class="stat"><b id="count">120</b><span>WALLPAPERS</span></div>
+    <div class="stat"><b>10</b><span>CATEGORIES</span></div>
+    <div class="stat"><b>Free</b><span>NO SIGNUP</span></div>
+  </div>
+  <a class="cta" href="#gallery">Explore Wallpapers ↓</a>
 </header>
 
-<div class="cats" id="cats">
-  <button class="active" data-cat="all">All</button>
-  <button data-cat="gradient">Gradient</button>
-  <button data-cat="dark">Dark</button>
-  <button data-cat="minimal">Minimal</button>
-  <button data-cat="nature">Nature</button>
-  <button data-cat="abstract">Abstract</button>
+<div class="controls" id="cats">
+  <div class="search">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+    <input type="text" id="q" placeholder="Search wallpapers (e.g. dark, neon, gradient)..." onkeyup="render()">
+  </div>
+  <div class="cats" id="catbar"></div>
 </div>
 
-<div class="grid" id="grid"></div>
+<div class="ad">[ Advertisement — AdSense auto-ads load here ]</div>
 
-<div class="ad">[ Advertisement space — AdSense banners load here ]</div>
+<div class="grid" id="gallery"><div class="loading">Loading wallpapers...</div></div>
+
+<div class="ad">[ Advertisement — AdSense auto-ads load here ]</div>
 
 <footer>
-  <p>© 2026 Wallify India · All wallpapers generated, free to use</p>
+  <p>© 2026 Wallify India · All wallpapers original & free to use</p>
   <p>Made in Bharat for Bharat 🇮🇳</p>
 </footer>
 
-<script>
-// Each wallpaper is an SVG (tiny file, scalable, downloadable as PNG)
-const WALLS=[
-  {n:"Sunset Blush",c:"gradient",svg:g(`<linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff8a00"/><stop offset="1" stop-color="#ff2d7e"/></linearGradient>`)},
-  {n:"Ocean Deep",c:"gradient",svg:g(`<linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00d4aa"/><stop offset="1" stop-color="#0066ff"/></linearGradient>`)},
-  {n:"Midnight",c:"dark",svg:g(`<linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0a0e1a"/><stop offset="1" stop-color="#1a1f3e"/></linearGradient><circle cx="540" cy="400" r="120" fill="#fff" opacity="0.9"/><circle cx="500" cy="380" r="120" fill="#0a0e1a"/>`)},
-  {n:"Void",c:"dark",svg:g(`<radialGradient id="g" cx="0.5" cy="0.4"><stop offset="0" stop-color="#2a2f55"/><stop offset="1" stop-color="#05060f"/></radialGradient>`)},
-  {n:"Pure",c:"minimal",svg:g(`<rect width="1080" height="1920" fill="#f5f5f0"/><circle cx="540" cy="960" r="180" fill="#ff8a00"/>`)},
-  {n:"Line",c:"minimal",svg:g(`<rect width="1080" height="1920" fill="#ffffff"/><rect x="80" y="900" width="920" height="6" fill="#111"/>`)},
-  {n:"Forest",c:"nature",svg:g(`<linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#134e2e"/><stop offset="1" stop-color="#0a2618"/></linearGradient><circle cx="850" cy="300" r="90" fill="#fcd34d" opacity="0.8"/>`)},
-  {n:"Sky",c:"nature",svg:g(`<linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#87ceeb"/><stop offset="1" stop-color="#e0f7fa"/></linearGradient>`)},
-  {n:"Prism",c:"abstract",svg:g(`<linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c3aed"/><stop offset="0.5" stop-color="#db2777"/><stop offset="1" stop-color="#00d4aa"/></linearGradient><polygon points="540,200 800,960 280,960" fill="#fff" opacity="0.15"/>`)},
-  {n:"Neon Grid",c:"abstract",svg:g(`<rect width="1080" height="1920" fill="#0a0e1a"/>${gridLines()}`)}
-];
-function g(inner){return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1920" preserveAspectRatio="xMidYMid slice"><defs>${inner.includes('Gradient')?inner:''}</defs><rect width="1080" height="1920" fill="url(#g)"/>${inner.includes('Gradient')?'':inner}</svg>`;}
-function gridLines(){let s='';for(let i=0;i<1080;i+=60)s+=`<line x1="${i}" y1="0" x2="${i}" y2="1920" stroke="#00d4aa" stroke-opacity="0.15"/>`;for(let j=0;j<1920;j+=60)s+=`<line x1="0" y1="${j}" x2="1080" y2="${j}" stroke="#00d4aa" stroke-opacity="0.15"/>`;return s;}
+<!-- Lightbox -->
+<div class="lb" id="lb" onclick="if(event.target===this)closeLb()">
+  <button class="x" onclick="closeLb()">×</button>
+  <img id="lb-img" src="" alt="">
+  <div class="bar"><b id="lb-name"></b><button class="dl" id="lb-dl">Download HD</button></div>
+</div>
 
-const grid=document.getElementById('grid');
-function render(cat){
-  const list=cat==='all'?WALLS:WALLS.filter(w=>w.c===cat);
-  grid.innerHTML=list.map((w,i)=>`
-    <div class="wp">
-      <img class="prev" src="data:image/svg+xml;utf8,${encodeURIComponent(w.svg)}" alt="${w.n}">
-      <div class="meta"><span>${w.n}</span><button class="dl" onclick="dl(${WALLS.indexOf(w)})">Download</button></div>
-    </div>`).join('');
+<script>
+const CATS=["all","gradient","abstract","minimal","dark","nature","geometric","flow","neon","marble","bokeh"];
+let DATA=[];
+
+// Load manifest
+fetch('assets/manifest.json').then(r=>r.json()).then(d=>{
+  DATA=d;
+  document.getElementById('count').textContent=DATA.length;
+  buildCats();
+  render();
+}).catch(e=>{document.getElementById('gallery').innerHTML='<div class="loading">Failed to load. Refresh.</div>';});
+
+let activeCat="all";
+function buildCats(){
+  const bar=document.getElementById('catbar');
+  bar.innerHTML=CATS.map(c=>`<button data-c="${c}" class="${c==='all'?'active':''}">${c[0].toUpperCase()+c.slice(1)}</button>`).join('');
+  bar.querySelectorAll('button').forEach(b=>b.onclick=()=>{
+    activeCat=b.dataset.c;
+    bar.querySelectorAll('button').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    render();
+  });
 }
-function dl(i){
-  const w=WALLS[i];
-  const img=new Image();
-  const svg64='data:image/svg+xml;utf8,'+encodeURIComponent(w.svg);
-  img.onload=()=>{
-    const c=document.createElement('canvas');c.width=1080;c.height=1920;
-    const x=c.getContext('2d');x.drawImage(img,0,0,1080,1920);
-    const a=document.createElement('a');a.download=w.n.replace(/\s+/g,'_')+'.png';a.href=c.toDataURL('image/png');a.click();
-  };
-  img.src=svg64;
+
+function render(){
+  const q=document.getElementById('q').value.toLowerCase();
+  let list=DATA.filter(w=>(activeCat==='all'||w.cat===activeCat)&&(!q||w.name.toLowerCase().includes(q)||w.cat.includes(q)));
+  const g=document.getElementById('gallery');
+  if(!list.length){g.innerHTML='<div class="loading">No wallpapers found.</div>';return;}
+  g.innerHTML=list.map(w=>`<div class="card" onclick="openLb('${w.file}','${w.name}','${w.cat}')">
+    <span class="tag">${w.cat}</span>
+    <img loading="lazy" src="assets/${w.file}" alt="${w.name} ${w.cat} wallpaper">
+    <div class="ov"><small>${w.cat}</small><b>${w.name}</b></div>
+  </div>`).join('');
 }
-// category buttons
-document.getElementById('cats').addEventListener('click',e=>{
-  if(e.target.tagName==='BUTTON'){
-    document.querySelectorAll('#cats button').forEach(b=>b.classList.remove('active'));
-    e.target.classList.add('active');
-    render(e.target.dataset.cat);
-  }
-});
-render('all');
+
+function openLb(file,name,cat){
+  document.getElementById('lb-img').src='assets/'+file;
+  document.getElementById('lb-name').textContent=name+' ('+cat+')';
+  document.getElementById('lb-dl').onclick=()=>{const a=document.createElement('a');a.href='assets/'+file;a.download=file;a.click();};
+  document.getElementById('lb').classList.add('open');
+}
+function closeLb(){document.getElementById('lb').classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb();});
 </script>
 </body>
 </html>
