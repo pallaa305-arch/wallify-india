@@ -3,162 +3,317 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wallify India — 100+ Free HD Wallpapers for Phone & Desktop</title>
-<meta name="description" content="Download 100+ free HD wallpapers for Android & iPhone. Gradient, dark, minimal, abstract, nature, neon, geometric styles. No signup, instant download.">
-<meta name="keywords" content="free wallpapers, hd wallpaper download, phone wallpaper, mobile wallpaper, desktop wallpaper, gradient wallpaper, dark wallpaper, aesthetic wallpaper, India">
-<meta property="og:title" content="Wallify India — 100+ Free HD Wallpapers">
-<meta property="og:description" content="Free aesthetic wallpapers for your phone. Instant download, no signup.">
-<meta property="og:type" content="website">
+<title>Wallify India — Live Generative Wallpapers (Dynamic)</title>
+<meta name="description" content="Generate unlimited unique HD wallpapers live in your browser. Black-background generative art. Download instantly. Free, no signup.">
+<meta name="keywords" content="live wallpaper generator, generative wallpaper, black wallpaper, dynamic wallpaper, free wallpaper maker, AI wallpaper">
+<meta property="og:title" content="Wallify India — Live Generative Wallpapers">
+<meta property="og:description" content="Generate unlimited unique HD wallpapers live. Pure black aesthetic. Instant download.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script>p5.disableFriendlyErrors = true;</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.3/p5.min.js"></script>
 <style>
   :root{
-    --bg:#080a14;--bg2:#0d1020;--card:#12162a;--line:#1f2540;
-    --txt:#eef1ff;--mut:#8b93b8;--accent:#00d4aa;--accent2:#ff8a00;
-    --grad:linear-gradient(135deg,#00d4aa,#7c3aed 50%,#ff8a00);
+    --bg:#000000;--panel:#0a0a0a;--line:#1a1a1a;--txt:#fff;--mut:#777;
+    --accent:#00d4aa;--accent2:#ff8a00;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{background:var(--bg);color:var(--txt);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  html,body{background:#000;color:#fff;font-family:'Inter',system-ui,sans-serif;overflow-x:hidden}
   h1,h2,h3,.logo{font-family:'Space Grotesk',sans-serif}
   a{color:inherit;text-decoration:none}
   /* Nav */
-  nav{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;position:sticky;top:0;z-index:30;background:rgba(8,10,20,.8);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-  .logo{font-size:1.4rem;font-weight:700;display:flex;align-items:center;gap:8px}
-  .logo .dot{width:12px;height:12px;border-radius:50%;background:var(--grad)}
-  .nav-links{display:flex;gap:22px;color:var(--mut);font-size:.92rem}
-  .nav-links a:hover{color:var(--accent)}
-  /* Hero */
-  header.hero{text-align:center;padding:70px 20px 50px;position:relative}
-  header.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 300px at 50% 0%,rgba(124,58,237,.25),transparent);pointer-events:none}
-  .hero h1{font-size:clamp(2.2rem,6vw,3.8rem);line-height:1.1;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .hero p{color:var(--mut);max-width:560px;margin:18px auto 0;font-size:1.05rem}
-  .stats{display:flex;gap:30px;justify-content:center;margin-top:28px;flex-wrap:wrap}
-  .stat b{font-size:1.6rem;color:var(--accent)}
-  .stat span{display:block;color:var(--mut);font-size:.8rem}
-  .cta{display:inline-block;margin-top:30px;padding:14px 30px;border-radius:12px;background:var(--grad);color:#080a14;font-weight:700;font-size:1rem;transition:.2s}
-  .cta:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(124,58,237,.4)}
-  /* Search + cats */
-  .controls{max-width:1100px;margin:0 auto;padding:0 20px}
-  .search{position:relative;margin-bottom:18px}
-  .search input{width:100%;padding:15px 20px 15px 48px;border-radius:14px;border:1px solid var(--line);background:var(--bg2);color:var(--txt);font-size:1rem;outline:none}
-  .search input:focus{border-color:var(--accent)}
-  .search svg{position:absolute;left:16px;top:50%;transform:translateY(-50%);opacity:.5}
-  .cats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px}
-  .cats button{padding:9px 18px;border-radius:22px;border:1px solid var(--line);background:var(--bg2);color:var(--mut);cursor:pointer;font-size:.88rem;transition:.18s}
-  .cats button.active,.cats button:hover{border-color:var(--accent);color:var(--accent);background:#101a2e}
-  /* Grid */
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:16px;max-width:1100px;margin:0 auto;padding:0 20px 40px}
-  .card{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:var(--card);cursor:pointer;transition:.22s;aspect-ratio:9/16}
-  .card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 14px 36px rgba(0,0,0,.5)}
-  .card img{width:100%;height:100%;object-fit:cover;display:block;max-width:100%}
-  .card .ov{position:absolute;inset:auto 0 0 0;padding:14px;background:linear-gradient(transparent,rgba(0,0,0,.85));opacity:0;transition:.22s}
-  .card:hover .ov{opacity:1}
-  .card .ov b{font-size:.92rem;display:block}
-  .card .ov small{color:var(--mut);font-size:.72rem;text-transform:uppercase;letter-spacing:1px}
-  .card .tag{position:absolute;top:10px;left:10px;background:rgba(0,0,0,.5);backdrop-filter:blur(6px);padding:4px 10px;border-radius:20px;font-size:.68rem;color:var(--accent)}
-  /* Lightbox */
-  .lb{position:fixed;inset:0;background:rgba(4,5,12,.92);display:none;align-items:center;justify-content:center;z-index:60;padding:20px;flex-direction:column}
-  .lb.open{display:flex}
-  .lb img{max-width:340px;width:90vw;max-height:70vh;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.7);object-fit:cover}
-  .lb .bar{margin-top:18px;display:flex;gap:14px;align-items:center}
-  .lb .bar b{font-size:1.05rem}
-  .lb .dl{padding:12px 26px;border-radius:10px;background:var(--grad);color:#080a14;font-weight:700;cursor:pointer;border:none;font-size:.95rem}
-  .lb .x{position:absolute;top:20px;right:26px;font-size:2rem;color:var(--mut);cursor:pointer;background:none;border:none}
-  /* Footer */
-  footer{text-align:center;padding:50px 20px;border-top:1px solid var(--line);color:var(--mut);font-size:.85rem}
+  nav{display:flex;align-items:center;justify-content:space-between;padding:16px 26px;position:sticky;top:0;z-index:30;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .logo{font-size:1.35rem;font-weight:700;display:flex;align-items:center;gap:8px}
+  .logo .dot{width:11px;height:11px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2))}
+  /* Stage */
+  .stage{max-width:520px;margin:26px auto 0;padding:0 16px}
+  .canvas-wrap{position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:#000;aspect-ratio:9/16;box-shadow:0 20px 60px rgba(0,0,0,.8)}
+  .canvas-wrap canvas{display:block;width:100%!important;height:100%!important}
+  .seedtag{position:absolute;top:12px;left:12px;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);padding:5px 12px;border-radius:20px;font-size:.72rem;color:var(--accent);border:1px solid #222}
+  /* Controls */
+  .controls{max-width:520px;margin:18px auto;padding:0 16px;display:flex;flex-direction:column;gap:14px}
+  .cats{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+  .cats button{padding:9px 15px;border-radius:20px;border:1px solid var(--line);background:var(--panel);color:var(--mut);cursor:pointer;font-size:.82rem;transition:.16s}
+  .cats button.active,.cats button:hover{border-color:var(--accent);color:var(--accent)}
+  .actions{display:flex;gap:12px;justify-content:center}
+  .btn{padding:13px 24px;border-radius:12px;border:none;font-weight:700;font-size:.95rem;cursor:pointer;transition:.18s;font-family:'Inter'}
+  .btn.gen{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#000}
+  .btn.gen:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(255,138,0,.3)}
+  .btn.dl{background:#111;color:#fff;border:1px solid #333}
+  .btn.dl:hover{border-color:var(--accent);color:var(--accent)}
+  .hint{text-align:center;color:var(--mut);font-size:.8rem;margin-top:4px}
+  /* Gallery of saved (session) */
+  .gallery{max-width:1100px;margin:40px auto;padding:0 20px}
+  .gallery h2{font-size:1.2rem;margin-bottom:16px;text-align:center;color:#aaa}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
+  .gcard{border-radius:12px;overflow:hidden;border:1px solid var(--line);aspect-ratio:9/16;cursor:pointer;transition:.18s}
+  .gcard:hover{border-color:var(--accent);transform:translateY(-3px)}
+  .gcard img{width:100%;height:100%;object-fit:cover}
+  .ad{text-align:center;margin:30px auto;max-width:1100px;padding:18px;background:#0a0a0a;border:1px dashed #222;border-radius:12px;color:#555;font-size:.8rem}
+  footer{text-align:center;padding:40px 20px;color:#555;font-size:.83rem;border-top:1px solid var(--line);margin-top:30px}
   footer a{color:var(--accent)}
-  .ad{text-align:center;margin:24px auto;max-width:1100px;padding:18px;background:var(--bg2);border:1px dashed var(--line);border-radius:12px;color:var(--mut);font-size:.8rem}
-  .loading{text-align:center;color:var(--mut);padding:40px}
 </style>
 </head>
 <body>
 <nav>
   <div class="logo"><span class="dot"></span>Wallify<span style="color:var(--accent)">India</span></div>
-  <div class="nav-links"><a href="#gallery">Gallery</a><a href="#cats">Categories</a><a href="#" onclick="alert('Free forever 🇮🇳')">About</a></div>
+  <div style="color:var(--mut);font-size:.85rem">⚡ Live Generative Engine</div>
 </nav>
 
-<header class="hero">
-  <h1>100+ Free HD Wallpapers</h1>
-  <p>Instant download for your phone & desktop. Gradient, dark, minimal, neon & more — generated fresh, no signup.</p>
-  <div class="stats">
-    <div class="stat"><b id="count">120</b><span>WALLPAPERS</span></div>
-    <div class="stat"><b>10</b><span>CATEGORIES</span></div>
-    <div class="stat"><b>Free</b><span>NO SIGNUP</span></div>
+<div class="stage">
+  <div class="canvas-wrap">
+    <div class="seedtag" id="seedtag">seed: —</div>
+    <div id="p5holder"></div>
   </div>
-  <a class="cta" href="#gallery">Explore Wallpapers ↓</a>
-</header>
-
-<div class="controls" id="cats">
-  <div class="search">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-    <input type="text" id="q" placeholder="Search wallpapers (e.g. dark, neon, gradient)..." onkeyup="render()">
-  </div>
-  <div class="cats" id="catbar"></div>
 </div>
 
-<div class="ad">[ Advertisement — AdSense auto-ads load here ]</div>
+<div class="controls">
+  <div class="cats" id="cats">
+    <button class="active" data-cat="flow">Flow</button>
+    <button data-cat="neon">Neon</button>
+    <button data-cat="minimal">Minimal</button>
+    <button data-cat="particles">Particles</button>
+    <button data-cat="marble">Marble</button>
+    <button data-cat="geo">Geometric</button>
+    <button data-cat="waves">Waves</button>
+  </div>
+  <div class="actions">
+    <button class="btn gen" onclick="newSeed()">⚡ Generate New</button>
+    <button class="btn dl" onclick="downloadPNG()">⬇ Download HD</button>
+    <button class="btn dl" onclick="saveToGallery()">★ Save</button>
+  </div>
+  <div class="hint">Har generate par 100% unique wallpaper · pure black base · mobile 1080×1920</div>
+</div>
 
-<div class="grid" id="gallery"><div class="loading">Loading wallpapers...</div></div>
+<div class="ad">[ Advertisement — AdSense auto-ads ]</div>
 
-<div class="ad">[ Advertisement — AdSense auto-ads load here ]</div>
+<div class="gallery">
+  <h2>★ Saved This Session</h2>
+  <div class="grid" id="saved"><div style="color:#444;grid-column:1/-1;text-align:center;padding:20px">Kuch nahi save kiya abhi — "Save" dabao</div></div>
+</div>
+
+<div class="ad">[ Advertisement — AdSense auto-ads ]</div>
 
 <footer>
-  <p>© 2026 Wallify India · All wallpapers original & free to use</p>
+  <p>© 2026 Wallify India · Live generative wallpapers, free forever</p>
   <p>Made in Bharat for Bharat 🇮🇳</p>
 </footer>
 
-<!-- Lightbox -->
-<div class="lb" id="lb" onclick="if(event.target===this)closeLb()">
-  <button class="x" onclick="closeLb()">×</button>
-  <img id="lb-img" src="" alt="">
-  <div class="bar"><b id="lb-name"></b><button class="dl" id="lb-dl">Download HD</button></div>
-</div>
-
 <script>
-const CATS=["all","gradient","abstract","minimal","dark","nature","geometric","flow","neon","marble","bokeh"];
-let DATA=[];
+// ===== CONFIG =====
+const W = 1080, H = 1920;
+let CFG = { seed: Math.floor(Math.random()*99999), cat: 'flow', t: 0 };
+const SEEDTAG = document.getElementById('seedtag');
 
-// Load manifest
-fetch('assets/manifest.json').then(r=>r.json()).then(d=>{
-  DATA=d;
-  document.getElementById('count').textContent=DATA.length;
-  buildCats();
-  render();
-}).catch(e=>{document.getElementById('gallery').innerHTML='<div class="loading">Failed to load. Refresh.</div>';});
+function newSeed(){ CFG.seed = Math.floor(Math.random()*999999); redrawLive(); }
+function setCat(c){ CFG.cat = c; redrawLive(); }
 
-let activeCat="all";
-function buildCats(){
-  const bar=document.getElementById('catbar');
-  bar.innerHTML=CATS.map(c=>`<button data-c="${c}" class="${c==='all'?'active':''}">${c[0].toUpperCase()+c.slice(1)}</button>`).join('');
-  bar.querySelectorAll('button').forEach(b=>b.onclick=()=>{
-    activeCat=b.dataset.c;
-    bar.querySelectorAll('button').forEach(x=>x.classList.remove('active'));
-    b.classList.add('active');
-    render();
-  });
+function redrawLive(){
+  SEEDTAG.textContent = 'seed: ' + CFG.seed;
+  if(window._p5 && window._p5.redraw){ window._p5.redraw(); }
 }
 
-function render(){
-  const q=document.getElementById('q').value.toLowerCase();
-  let list=DATA.filter(w=>(activeCat==='all'||w.cat===activeCat)&&(!q||w.name.toLowerCase().includes(q)||w.cat.includes(q)));
-  const g=document.getElementById('gallery');
-  if(!list.length){g.innerHTML='<div class="loading">No wallpapers found.</div>';return;}
-  g.innerHTML=list.map(w=>`<div class="card" onclick="openLb('${w.file}','${w.name}','${w.cat}')">
-    <span class="tag">${w.cat}</span>
-    <img loading="lazy" src="assets/${w.file}" alt="${w.name} ${w.cat} wallpaper">
-    <div class="ov"><small>${w.cat}</small><b>${w.name}</b></div>
-  </div>`).join('');
+document.querySelectorAll('#cats button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#cats button').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); setCat(b.dataset.cat);
+});
+
+// ===== p5 instance =====
+const sketch = (p) => {
+  p.setup = () => {
+    const c = p.createCanvas(W, H);
+    c.parent('p5holder');
+    p.pixelDensity(1);
+    p.noLoop();
+    window._p5 = p;
+    redrawLive();
+  };
+  p.draw = () => renderScene(p);
+};
+new p5(sketch);
+
+// ===== RENDER ENGINE (black bg, generative) =====
+function renderScene(p){
+  p.randomSeed(CFG.seed); p.noiseSeed(CFG.seed);
+  p.colorMode(p.RGB, 255);
+  p.background(0); // PURE BLACK — no blueish
+  const cat = CFG.cat;
+  if(cat==='flow') flowField(p);
+  else if(cat==='neon') neonGrid(p);
+  else if(cat==='minimal') minimal(p);
+  else if(cat==='particles') particles(p);
+  else if(cat==='marble') marble(p);
+  else if(cat==='geo') geometric(p);
+  else if(cat==='waves') waves(p);
+  // subtle vignette for depth
+  p.noFill();
+  for(let i=0;i<60;i++){
+    p.stroke(0,0,0, i*0.6);
+    p.strokeWeight(2);
+    p.rect(i, i, W-2*i, H-2*i);
+  }
 }
 
-function openLb(file,name,cat){
-  document.getElementById('lb-img').src='assets/'+file;
-  document.getElementById('lb-name').textContent=name+' ('+cat+')';
-  document.getElementById('lb-dl').onclick=()=>{const a=document.createElement('a');a.href='assets/'+file;a.download=file;a.click();};
-  document.getElementById('lb').classList.add('open');
+// --- Flow field ---
+function flowField(p){
+  const cols = pickPalette(p);
+  p.strokeWeight(1.2);
+  for(let n=0;n<2600;n++){
+    let x = p.random(W), y = p.random(H);
+    const c = p.lerpColor(p.color(cols[0]), p.color(cols[1]), p.random());
+    p.stroke(c.levels[0], c.levels[1], c.levels[2], 120);
+    for(let s=0;s<26;s++){
+      const a = p.noise(x*0.0016, y*0.0016, CFG.seed*0.01)*p.TWO_PI*2;
+      const nx = x + Math.cos(a)*5.5, ny = y + Math.sin(a)*5.5;
+      p.line(x,y,nx,ny); x=nx; y=ny;
+      if(x<0||x>W||y<0||y>H) break;
+    }
+  }
 }
-function closeLb(){document.getElementById('lb').classList.remove('open');}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb();});
+
+// --- Neon grid ---
+function neonGrid(p){
+  const cols = pickPalette(p);
+  p.noFill();
+  const off = CFG.seed % 100;
+  for(let gx=0; gx<W; gx+=70){
+    for(let gy=0; gy<H; gy+=70){
+      const c = p.lerpColor(p.color(cols[0]), p.color(cols[1]), (gx+gy)/(W+H));
+      p.stroke(c.levels[0],c.levels[1],c.levels[2], 90 + (gx+gy)%120);
+      p.strokeWeight(1.5);
+      const r = 18 + (p.noise(gx*0.01, gy*0.01, CFG.seed)*30);
+      p.ellipse(gx+35, gy+35, r, r);
+    }
+  }
+  // glow lines
+  for(let i=0;i<8;i++){
+    const c = p.lerpColor(p.color(cols[0]), p.color(cols[1]), i/8);
+    p.stroke(c.levels[0],c.levels[1],c.levels[2], 200);
+    p.strokeWeight(2);
+    p.line(0, off+i*200, W, off+i*200+200);
+  }
+}
+
+// --- Minimal ---
+function minimal(p){
+  const cols = pickPalette(p);
+  const c = p.color(cols[1]);
+  const shape = CFG.seed % 3;
+  if(shape===0){ p.noFill(); p.stroke(c.levels[0],c.levels[1],c.levels[2],230); p.strokeWeight(3);
+    p.ellipse(W/2, H*0.42, 420, 420); }
+  else if(shape===1){ p.noStroke(); p.fill(c.levels[0],c.levels[1],c.levels[2],220);
+    p.rect(W/2-3, 300, 6, H*0.55); }
+  else { p.noFill(); p.stroke(c.levels[0],c.levels[1],c.levels[2],220); p.strokeWeight(4);
+    p.arc(140, 700, W-280, W-280, 0.3, p.PI-0.3); }
+  // tiny accent dot
+  p.fill(c.levels[0],c.levels[1],c.levels[2], 255);
+  p.noStroke(); p.ellipse(W/2, H*0.42, 16, 16);
+}
+
+// --- Particles ---
+function particles(p){
+  const cols = pickPalette(p);
+  const N = 520;
+  for(let i=0;i<N;i++){
+    const x = p.random(W), y = p.random(H);
+    const c = p.lerpColor(p.color(cols[0]), p.color(cols[1]), p.random());
+    p.noStroke(); p.fill(c.levels[0],c.levels[1],c.levels[2], 200);
+    const s = p.random(1.5, 5);
+    p.ellipse(x, y, s, s);
+  }
+  // connecting threads
+  p.stroke(255,40); p.strokeWeight(1);
+  for(let i=0;i<60;i++){
+    const x1=p.random(W),y1=p.random(H),x2=p.random(W),y2=p.random(H);
+    if(p.dist(x1,y1,x2,y2)<260) p.line(x1,y1,x2,y2);
+  }
+}
+
+// --- Marble (noise veins) ---
+function marble(p){
+  const cols = pickPalette(p);
+  p.loadPixels();
+  const base = p.color(cols[0]); const hi = p.color(cols[1]);
+  for(let y=0;y<H;y+=2){
+    for(let x=0;x<W;x+=2){
+      let v = 0;
+      v += p.noise(x*0.002, y*0.002, CFG.seed*0.1);
+      v += 0.5*p.noise(x*0.006, y*0.006, CFG.seed*0.2);
+      const t = p.constrain(v,0,1);
+      const r = p.lerp(base.levels[0], hi.levels[0], t);
+      const g = p.lerp(base.levels[1], hi.levels[1], t);
+      const b = p.lerp(base.levels[2], hi.levels[2], t);
+      for(let dy=0;dy<2;dy++)for(let dx=0;dx<2;dx++){
+        const idx = 4*((y+dy)*W + (x+dx));
+        p.pixels[idx]=r; p.pixels[idx+1]=g; p.pixels[idx+2]=b; p.pixels[idx+3]=255;
+      }
+    }
+  }
+  p.updatePixels();
+}
+
+// --- Geometric ---
+function geometric(p){
+  const cols = pickPalette(p);
+  p.noFill();
+  for(let i=0;i<26;i++){
+    const c = p.lerpColor(p.color(cols[0]), p.color(cols[1]), i/26);
+    p.stroke(c.levels[0],c.levels[1],c.levels[2], 200);
+    p.strokeWeight(p.random(1,4));
+    const x = p.random(W), y = p.random(H), s = p.random(80, 360);
+    if(CFG.seed%2) p.triangle(x,y,x+s,y,x+s/2,y+s);
+    else p.rect(x,y,s,s);
+  }
+}
+
+// --- Waves ---
+function waves(p){
+  const cols = pickPalette(p);
+  p.noFill();
+  for(let i=0;i<42;i++){
+    const c = p.lerpColor(p.color(cols[0]), p.color(cols[1]), i/42);
+    p.stroke(c.levels[0],c.levels[1],c.levels[2], 180);
+    p.strokeWeight(2.2);
+    p.beginShape();
+    for(let x=0;x<=W;x+=12){
+      const y = i*44 + p.sin(x*0.006 + i*0.3 + CFG.seed*0.01)*70;
+      p.vertex(x, y);
+    }
+    p.endShape();
+  }
+}
+
+// ===== Palettes (black-friendly, vivid) =====
+function pickPalette(p){
+  const sets = {
+    flow:[ [0,212,170], [0,102,255] ],
+    neon:[ [255,0,200], [0,255,231] ],
+    minimal:[ [255,138,0], [255,255,255] ],
+    particles:[ [124,58,237], [0,212,170] ],
+    marble:[ [245,245,245], [218,165,32] ],
+    geo:[ [139,92,246], [56,189,248] ],
+    waves:[ [244,63,94], [245,158,11] ]
+  };
+  return sets[CFG.cat] || sets.flow;
+}
+
+// ===== Actions =====
+function downloadPNG(){
+  if(window._p5) window._p5.saveCanvas('wallify_'+CFG.cat+'_'+CFG.seed, 'png');
+}
+let savedCount=0;
+function saveToGallery(){
+  const cv = document.querySelector('#p5holder canvas');
+  if(!cv) return;
+  const url = cv.toDataURL('image/png');
+  const grid = document.getElementById('saved');
+  if(savedCount===0) grid.innerHTML='';
+  const d = document.createElement('div'); d.className='gcard';
+  d.innerHTML = `<img src="${url}" alt="saved">`;
+  d.onclick = ()=>{ const a=document.createElement('a'); a.href=url; a.download='wallify.png'; a.click(); };
+  grid.prepend(d);
+  savedCount++;
+}
 </script>
 </body>
 </html>
-<!-- v1.1 - 21 Aug 2026  2:41:30 AM -->
