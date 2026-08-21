@@ -3,326 +3,271 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wallify India — Beautiful Live Wallpapers (Dynamic)</title>
-<meta name="description" content="Generate stunning HD wallpapers live: clean aesthetic gradients, soft generative art, and photo-style renders. Pure black base. Free download.">
-<meta name="keywords" content="beautiful wallpaper, aesthetic gradient, phone wallpaper, live wallpaper maker, black wallpaper, generative art, free wallpaper download">
+<title>Wallify India — Live Generative & HD Wallpapers</title>
+<meta name="description" content="Generate stunning HD wallpapers live with our generative engine, or download 130+ curated 4K wallpapers. Free, made in Bharat.">
+<meta name="keywords" content="wallpaper, hd wallpaper, phone wallpaper, generative art, live wallpaper, free wallpaper download, aesthetic wallpaper">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<script>p5.disableFriendlyErrors = true;</script>
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Chakra+Petch:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script>p5.disableFriendlyErrors=true;</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.3/p5.min.js"></script>
 <style>
   :root{
-    --bg:#000;--panel:#0a0a0a;--line:#1c1c1c;--txt:#fff;--mut:#777;
-    --accent:#00d4aa;--accent2:#ff8a00;
+    --bg:#0B0614; --bg2:#140A22; --panel:#1A0F2E; --panel2:#221341;
+    --line:#2E1D4D; --txt:#F4ECFF; --mut:#A792C9;
+    --primary:#7C3AED; --secondary:#EC4899; --accent:#2563EB;
+    --on-primary:#fff; --on-secondary:#0B0614;
+    --radius:18px; --shadow:0 18px 50px rgba(124,58,237,.25);
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{background:#000;color:#fff;font-family:'Inter',system-ui,sans-serif;overflow-x:hidden}
-  h1,h2,h3,.logo{font-family:'Space Grotesk',sans-serif}
+  html{scroll-behavior:smooth}
+  body{background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(236,72,153,.18), transparent 60%),
+      radial-gradient(900px 500px at -10% 10%, rgba(37,99,235,.16), transparent 55%),
+      var(--bg);
+    color:var(--txt);font-family:'Chakra Petch',system-ui,sans-serif;overflow-x:hidden;line-height:1.55}
+  h1,h2,h3,.logo,.brandfont{font-family:'Russo One',sans-serif;letter-spacing:.5px}
   a{color:inherit;text-decoration:none}
-  nav{display:flex;align-items:center;justify-content:space-between;padding:16px 26px;position:sticky;top:0;z-index:30;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-  .logo{font-size:1.35rem;font-weight:700;display:flex;align-items:center;gap:8px}
-  .logo .dot{width:11px;height:11px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2))}
-  .stage{max-width:520px;margin:26px auto 0;padding:0 16px}
-  .canvas-wrap{position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:#000;aspect-ratio:9/16;box-shadow:0 20px 60px rgba(0,0,0,.8)}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+  /* NAV */
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);
+    background:rgba(11,6,20,.72);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .logo{font-size:1.4rem;display:flex;align-items:center;gap:10px}
+  .logo .dot{width:13px;height:13px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--secondary))}
+  .logo span{background:linear-gradient(135deg,var(--secondary),var(--primary));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .nav-links{display:flex;gap:26px;font-weight:600;font-size:.92rem}
+  .nav-links a{color:var(--mut);transition:.18s}
+  .nav-links a:hover{color:var(--txt)}
+  .nav-cta{padding:9px 18px;border-radius:30px;background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;font-weight:700;font-size:.85rem}
+  @media(max-width:760px){.nav-links{display:none}}
+  /* HERO */
+  .hero{padding:70px 0 40px;text-align:center}
+  .badge{display:inline-flex;align-items:center;gap:8px;padding:7px 16px;border-radius:30px;
+    border:1px solid var(--line);background:var(--panel);color:var(--mut);font-size:.8rem;margin-bottom:22px}
+  .badge .pulse{width:8px;height:8px;border-radius:50%;background:var(--secondary);box-shadow:0 0 0 0 rgba(236,72,153,.6);animation:pulse 2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(236,72,153,.5)}70%{box-shadow:0 0 0 12px rgba(236,72,153,0)}100%{box-shadow:0 0 0 0 rgba(236,72,153,0)}}
+  .hero h1{font-size:clamp(2.2rem,6vw,4rem);line-height:1.05;margin-bottom:16px}
+  .hero h1 .grad{background:linear-gradient(135deg,#fff,var(--secondary) 50%,var(--primary));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{max-width:620px;margin:0 auto 28px;color:var(--mut);font-size:1.05rem}
+  .hero-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{padding:14px 26px;border-radius:14px;border:none;font-family:'Chakra Petch';font-weight:700;font-size:.95rem;cursor:pointer;transition:.2s}
+  .btn.gen{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff}
+  .btn.gen:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+  .btn.ghost{background:var(--panel);color:var(--txt);border:1px solid var(--line)}
+  .btn.ghost:hover{border-color:var(--primary);color:var(--primary)}
+  /* GENERATOR */
+  .studio{display:grid;grid-template-columns:minmax(300px,420px) 1fr;gap:34px;align-items:start;margin:30px 0 20px}
+  @media(max-width:880px){.studio{grid-template-columns:1fr}}
+  .canvas-wrap{position:relative;border-radius:24px;overflow:hidden;border:1px solid var(--line);
+    background:#000;aspect-ratio:9/16;box-shadow:var(--shadow)}
   .canvas-wrap canvas{display:block;width:100%!important;height:100%!important}
-  .seedtag{position:absolute;top:12px;left:12px;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);padding:5px 12px;border-radius:20px;font-size:.72rem;color:var(--accent);border:1px solid #222;z-index:5}
-  .controls{max-width:520px;margin:18px auto;padding:0 16px;display:flex;flex-direction:column;gap:14px}
-  .cats{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
-  .cats button{padding:9px 15px;border-radius:20px;border:1px solid var(--line);background:var(--panel);color:var(--mut);cursor:pointer;font-size:.82rem;transition:.16s}
-  .cats button.active,.cats button:hover{border-color:var(--accent);color:var(--accent)}
-  .actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-  .btn{padding:13px 22px;border-radius:12px;border:none;font-weight:700;font-size:.93rem;cursor:pointer;transition:.18s;font-family:'Inter'}
-  .btn.gen{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#000}
-  .btn.gen:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(255,138,0,.3)}
-  .btn.dl{background:#111;color:#fff;border:1px solid #333}
-  .btn.dl:hover{border-color:var(--accent);color:var(--accent)}
-  .hint{text-align:center;color:var(--mut);font-size:.8rem;margin-top:4px}
-  .ad{text-align:center;margin:30px auto;max-width:1100px;padding:18px;background:#0a0a0a;border:1px dashed #222;border-radius:12px;color:#555;font-size:.8rem}
-  footer{text-align:center;padding:40px 20px;color:#555;font-size:.83rem;border-top:1px solid var(--line);margin-top:30px}
-  footer a{color:var(--accent)}
+  .seedtag{position:absolute;top:12px;left:12px;background:rgba(11,6,20,.6);backdrop-filter:blur(8px);
+    padding:6px 13px;border-radius:20px;font-size:.72rem;color:var(--secondary);border:1px solid var(--line);z-index:5}
+  .panel{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);
+    border-radius:var(--radius);padding:24px}
+  .panel h3{font-size:1rem;margin-bottom:14px;color:var(--txt)}
+  .cats{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:18px}
+  .cats button{padding:9px 15px;border-radius:20px;border:1px solid var(--line);background:var(--panel2);
+    color:var(--mut);cursor:pointer;font-size:.82rem;font-family:'Chakra Petch';font-weight:600;transition:.16s}
+  .cats button.active,.cats button:hover{border-color:var(--secondary);color:#fff;background:linear-gradient(135deg,rgba(124,58,237,.4),rgba(236,72,153,.4))}
+  .row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+  .mini{padding:11px 18px;border-radius:12px;border:1px solid var(--line);background:var(--panel2);color:var(--txt);font-weight:600;font-size:.85rem;cursor:pointer;font-family:'Chakra Petch';transition:.16s}
+  .mini:hover{border-color:var(--primary);color:var(--primary)}
+  .mini.dl{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;border:none}
+  .hint{color:var(--mut);font-size:.8rem;margin-top:6px}
+  /* SECTION HEADERS */
+  .sec-head{text-align:center;margin:60px 0 30px}
+  .sec-head h2{font-size:clamp(1.6rem,4vw,2.4rem);margin-bottom:8px}
+  .sec-head p{color:var(--mut)}
+  /* GALLERY */
+  .filters{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:26px}
+  .filters button{padding:8px 18px;border-radius:30px;border:1px solid var(--line);background:var(--panel);
+    color:var(--mut);cursor:pointer;font-size:.82rem;font-weight:600;font-family:'Chakra Petch';transition:.16s}
+  .filters button.active,.filters button:hover{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;border-color:transparent}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px}
+  .card{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);cursor:pointer;aspect-ratio:9/16;background:#000;transition:.22s}
+  .card:hover{transform:translateY(-5px);border-color:var(--secondary);box-shadow:var(--shadow)}
+  .card img{width:100%;height:100%;object-fit:cover;display:block}
+  .card .dl{position:absolute;inset:auto 10px 10px auto;background:rgba(11,6,20,.7);backdrop-filter:blur(6px);
+    border:1px solid var(--line);color:#fff;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;transition:.2s;font-size:1rem}
+  .card:hover .dl{opacity:1}
+  .card .tag{position:absolute;top:8px;left:8px;background:rgba(11,6,20,.6);padding:3px 10px;border-radius:20px;font-size:.68rem;color:var(--secondary);text-transform:capitalize}
+  /* FEATURES */
+  .feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:10px}
+  .fcard{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:var(--radius);padding:24px;transition:.2s}
+  .fcard:hover{border-color:var(--primary);transform:translateY(-4px)}
+  .fcard .ic{font-size:1.6rem;margin-bottom:12px}
+  .fcard h4{font-family:'Russo One';font-size:.95rem;margin-bottom:6px}
+  .fcard p{color:var(--mut);font-size:.86rem}
+  /* FOOTER */
+  footer{border-top:1px solid var(--line);margin-top:70px;padding:46px 20px;text-align:center;color:var(--mut);font-size:.85rem}
+  footer .logo{justify-content:center;margin-bottom:14px;font-size:1.15rem}
+  footer a{color:var(--secondary)}
+  /* MODAL */
+  .modal{position:fixed;inset:0;background:rgba(5,2,10,.92);display:none;align-items:center;justify-content:center;z-index:100;padding:20px}
+  .modal.open{display:flex}
+  .modal img{max-width:90vw;max-height:86vh;border-radius:16px;border:1px solid var(--line);box-shadow:var(--shadow)}
+  .modal .close{position:absolute;top:18px;right:22px;font-size:2rem;color:#fff;cursor:pointer;background:none;border:none}
 </style>
 </head>
 <body>
+
 <nav>
-  <div class="logo"><span class="dot"></span>Wallify<span style="color:var(--accent)">India</span></div>
-  <div style="color:var(--mut);font-size:.85rem">⚡ Live Generative Engine</div>
+  <div class="wrap">
+    <div class="logo"><span class="dot"></span>Wallify<span>India</span></div>
+    <div class="nav-links">
+      <a href="#studio">Studio</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#features">Features</a>
+    </div>
+    <a href="#studio" class="nav-cta">Generate →</a>
+  </div>
 </nav>
 
-<div class="stage">
-  <div class="canvas-wrap">
-    <div class="seedtag" id="seedtag">seed: —</div>
-    <div id="p5holder"></div>
+<header class="hero">
+  <div class="wrap">
+    <div class="badge"><span class="pulse"></span> Live Generative Engine · 130+ Curated 4K</div>
+    <h1>Phone ka <span class="grad">Wallpaper</span><br>ab banao khud</h1>
+    <p>Live generative engine se har baar unique wallpaper banao, ya 130+ curated 4K wallpapers download karo. Free, fast, made in Bharat 🇮🇳</p>
+    <div class="hero-actions">
+      <a href="#studio" class="btn gen">⚡ Generate Now</a>
+      <a href="#gallery" class="btn ghost">🖼 Browse Gallery</a>
+    </div>
   </div>
-</div>
+</header>
 
-<div class="controls">
-  <div class="cats" id="cats">
-    <button class="active" data-cat="aesthetic">Aesthetic</button>
-    <button data-cat="aurora">Aurora</button>
-    <button data-cat="soft">Soft Gen</button>
-    <button data-cat="mesh">Mesh</button>
-    <button data-cat="photo">Photo-style</button>
-    <button data-cat="bloom">Bloom</button>
-    <button data-cat="waves">Waves</button>
+<section id="studio" class="wrap">
+  <div class="studio">
+    <div class="canvas-wrap">
+      <div class="seedtag" id="seedtag">seed: —</div>
+      <div id="p5holder"></div>
+    </div>
+    <div class="panel">
+      <h3>🎨 Generative Studio</h3>
+      <div class="cats" id="cats">
+        <button class="active" data-cat="aesthetic">Aesthetic</button>
+        <button data-cat="aurora">Aurora</button>
+        <button data-cat="soft">Soft Gen</button>
+        <button data-cat="mesh">Mesh</button>
+        <button data-cat="photo">Photo-style</button>
+        <button data-cat="bloom">Bloom</button>
+        <button data-cat="waves">Waves</button>
+      </div>
+      <div class="row">
+        <button class="mini dl" onclick="newSeed()">⚡ Generate New</button>
+        <button class="mini" onclick="downloadPNG()">⬇ Download HD</button>
+        <button class="mini" onclick="saveToGallery()">★ Save</button>
+      </div>
+      <p class="hint">Pure black base · mobile 1080×1920 · har generate par unique seed</p>
+      <div class="grid" id="saved" style="margin-top:18px;grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:8px"></div>
+    </div>
   </div>
-  <div class="actions">
-    <button class="btn gen" onclick="newSeed()">⚡ Generate New</button>
-    <button class="btn dl" onclick="downloadPNG()">⬇ Download HD</button>
-    <button class="btn dl" onclick="saveToGallery()">★ Save</button>
-  </div>
-  <div class="hint">Clean · Beautiful · Pure black base · mobile 1080×1920 · har generate par unique</div>
-</div>
+</section>
 
-<div class="ad">[ Advertisement — AdSense auto-ads ]</div>
-<div class="ad">[ Advertisement — AdSense auto-ads ]</div>
+<section id="gallery" class="wrap">
+  <div class="sec-head">
+    <h2>Curated 4K Gallery</h2>
+    <p>130+ hand-picked wallpapers across 10 categories — tap to preview, download free.</p>
+  </div>
+  <div class="filters" id="filters"></div>
+  <div class="grid" id="galleryGrid"></div>
+</section>
+
+<section id="features" class="wrap">
+  <div class="sec-head">
+    <h2>Why Wallify India</h2>
+    <p>Sab kuch free. Koi signup nahi. Bas download karo.</p>
+  </div>
+  <div class="feat">
+    <div class="fcard"><div class="ic">⚡</div><h4>Live Generate</h4><p>Infinite unique wallpapers, har click par naya seed.</p></div>
+    <div class="fcard"><div class="ic">🖼</div><h4>130+ Curated</h4><p>10 categories of ready 4K wallpapers, phone-perfect.</p></div>
+    <div class="fcard"><div class="ic">📱</div><h4>Phone Native</h4><p>1080×1920 aspect, designed for mobile lockscreens.</p></div>
+    <div class="fcard"><div class="ic">🇮🇳</div><h4>Made in Bharat</h4><p>Free forever, no ads clutter, no paywalls.</p></div>
+  </div>
+</section>
 
 <footer>
-  <p>© 2026 Wallify India · Live generative wallpapers, free forever</p>
+  <div class="logo"><span class="dot"></span>Wallify<span>India</span></div>
+  <p>© 2026 Wallify India · Live generative & curated wallpapers, free forever</p>
   <p>Made in Bharat for Bharat 🇮🇳</p>
 </footer>
 
-<script>
-const W = 1080, H = 1920;
-let CFG = { seed: Math.floor(Math.random()*999999), cat: 'aesthetic' };
-const SEEDTAG = document.getElementById('seedtag');
+<div class="modal" id="modal"><button class="close" onclick="closeModal()">×</button><img id="modalImg" src="" alt="preview"></div>
 
-function newSeed(){ CFG.seed = Math.floor(Math.random()*9999999); redrawLive(); }
-function setCat(c){ CFG.cat = c; redrawLive(); }
-function redrawLive(){
-  SEEDTAG.textContent = 'seed: ' + CFG.seed;
-  if(window._p5 && window._p5.redraw) window._p5.redraw();
-}
+<script>
+/* ===================== GENERATIVE ENGINE ===================== */
+const W=1080,H=1920;
+let CFG={seed:Math.floor(Math.random()*999999),cat:'aesthetic'};
+const SEEDTAG=document.getElementById('seedtag');
+function newSeed(){CFG.seed=Math.floor(Math.random()*9999999);redrawLive();}
+function setCat(c){CFG.cat=c;redrawLive();}
+function redrawLive(){SEEDTAG.textContent='seed: '+CFG.seed;if(window._p5&&window._p5.redraw)window._p5.redraw();}
 document.querySelectorAll('#cats button').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('#cats button').forEach(x=>x.classList.remove('active'));
-  b.classList.add('active'); setCat(b.dataset.cat);
+  b.classList.add('active');setCat(b.dataset.cat);
 });
-
-const sketch = (p) => {
-  p.setup = () => {
-    const c = p.createCanvas(W, H); c.parent('p5holder');
-    p.pixelDensity(1); p.noLoop(); window._p5 = p; redrawLive();
-  };
-  p.draw = () => renderScene(p);
+const sketch=(p)=>{
+  p.setup=()=>{const c=p.createCanvas(W,H);c.parent('p5holder');p.pixelDensity(1);p.noLoop();window._p5=p;redrawLive();};
+  p.draw=()=>renderScene(p);
 };
 new p5(sketch);
-
 function renderScene(p){
-  p.randomSeed(CFG.seed); p.noiseSeed(CFG.seed);
-  p.colorMode(p.RGB, 255);
-  p.background(0);
-  const cat = CFG.cat;
-  if(cat==='aesthetic') aesthetic(p);
-  else if(cat==='aurora') aurora(p);
-  else if(cat==='soft') softGen(p);
-  else if(cat==='mesh') mesh(p);
-  else if(cat==='photo') photoStyle(p);
-  else if(cat==='bloom') bloom(p);
-  else if(cat==='waves') waves(p);
+  p.randomSeed(CFG.seed);p.noiseSeed(CFG.seed);p.colorMode(p.RGB,255);p.background(0);
+  const cat=CFG.cat;
+  if(cat==='aesthetic')aesthetic(p);else if(cat==='aurora')aurora(p);else if(cat==='soft')softGen(p);
+  else if(cat==='mesh')mesh(p);else if(cat==='photo')photoStyle(p);else if(cat==='bloom')bloom(p);else if(cat==='waves')waves(p);
 }
-
-// ===== 1. CLEAN AESTHETIC GRADIENT (diagonal, smooth, soft glow) =====
-function aesthetic(p){
-  const pal = AESTHETIC[CFG.seed % AESTHETIC.length];
-  const g = p.createGraphics(W,H);
-  g.noStroke();
-  for(let y=0;y<H;y++){
-    const t = y/H;
-    const r = lerp(p, pal[0][0], pal[1][0], t);
-    const gg = lerp(p, pal[0][1], pal[1][1], t);
-    const b = lerp(p, pal[0][2], pal[1][2], t);
-    g.fill(r,gg,b); g.rect(0,y,W,1);
-  }
-  // soft glow blob top-right
-  const gx = W*0.7, gy = H*0.22;
-  for(let i=0;i<80;i++){
-    g.fill(pal[2][0],pal[2][1],pal[2][2], 2.2);
-    g.ellipse(gx, gy, 620-i*7, 620-i*7);
-  }
-  p.image(g,0,0);
-  // subtle grain
-  grain(p, 10);
-}
-
-// ===== 2. AURORA (soft flowing bands, dark base) =====
-function aurora(p){
-  p.noStroke();
-  for(let i=0;i<140;i++){
-    const t = i/140;
-    const y = t*H;
-    const col = auroraColor(p, t);
-    p.fill(col[0], col[1], col[2], 5);
-    p.beginShape();
-    for(let x=0;x<=W;x+=20){
-      const yy = y + p.sin(x*0.004 + CFG.seed + i*0.05)*60 + p.noise(x*0.003, i*0.1)*100;
-      p.vertex(x, yy);
-    }
-    p.vertex(W, H); p.vertex(0, H); p.endShape(p.CLOSE);
-  }
-}
-function auroraColor(p, t){
-  const sets = [[0,212,170],[124,58,237],[0,102,255],[255,0,170],[0,255,231]];
-  const a = sets[CFG.seed % sets.length];
-  const b = sets[(CFG.seed+2) % sets.length];
-  return [lerp(p,a[0],b[0],t), lerp(p,a[1],b[1],t), lerp(p,a[2],b[2],t)];
-}
-
-// ===== 3. SOFT GENERATIVE (gentle flow, low opacity, calm) =====
-function softGen(p){
-  const pal = SOFT[CFG.seed % SOFT.length];
-  p.strokeWeight(1.4);
-  for(let n=0;n<900;n++){
-    let x=p.random(W), y=p.random(H);
-    const c = p.lerpColor(p.color(pal[0]), p.color(pal[1]), p.random());
-    p.stroke(c.levels[0],c.levels[1],c.levels[2], 26);
-    for(let s=0;s<18;s++){
-      const a = p.noise(x*0.0022, y*0.0022, CFG.seed*0.02)*p.TWO_PI*2;
-      const nx=x+Math.cos(a)*7, ny=y+Math.sin(a)*7;
-      p.line(x,y,nx,ny); x=nx; y=ny;
-      if(x<0||x>W||y<0||y>H) break;
-    }
-  }
-}
-
-// ===== 4. MESH GRADIENT (multi radial, premium) =====
-function mesh(p){
-  const pal = MESH[CFG.seed % MESH.length];
-  const g = p.createGraphics(W,H); g.noStroke();
-  g.background(0);
-  const pts = [[0.2,0.25],[0.8,0.3],[0.5,0.7],[0.25,0.85],[0.8,0.8]];
-  for(let layer=0;layer<5;layer++){
-    const c = pal[layer % pal.length];
-    const [fx,fy] = pts[layer];
-    // blur via stacked ellipses
-    for(let i=0;i<70;i++){
-      g.fill(c[0],c[1],c[2], 3);
-      g.ellipse(fx*W, fy*H, 760-i*10, 760-i*10);
-    }
-  }
-  p.image(g,0,0);
-  p.blendMode(p.SCREEN);
-  p.noStroke();
-  p.fill(255,255,255,8); p.rect(0,0,W,H);
-  p.blendMode(p.BLEND);
-  grain(p, 8);
-}
-
-// ===== 5. PHOTO-STYLE (mountains/lake silhouette, dusk) =====
-function photoStyle(p){
-  const pal = PHOTO[CFG.seed % PHOTO.length];
-  // sky gradient
-  for(let y=0;y<H*0.62;y++){
-    const t=y/(H*0.62);
-    p.stroke(lerp(p,pal[0][0],pal[1][0],t), lerp(p,pal[0][1],pal[1][1],t), lerp(p,pal[0][2],pal[1][2],t));
-    p.line(0,y,W,y);
-  }
-  // sun
-  p.noStroke();
-  const sx=W*0.5, sy=H*0.42;
-  for(let i=0;i<60;i++){ p.fill(pal[2][0],pal[2][1],pal[2][2], 3); p.ellipse(sx,sy, 360-i*5, 360-i*5); }
-  // mountains
-  p.fill(pal[3][0],pal[3][1],pal[3][2]);
-  p.beginShape(); p.vertex(0,H*0.62);
-  let mx=0;
-  while(mx<W){ const h=H*0.62 + p.random(-90,90); p.vertex(mx, h); mx+= W/8; }
-  p.vertex(W,H); p.vertex(0,H); p.endShape(p.CLOSE);
-  // reflection
-  p.fill(pal[3][0]*0.5,pal[3][1]*0.5,pal[3][2]*0.5, 120);
-  p.rect(0,H*0.62,W,H*0.38);
-}
-
-// ===== 6. BLOOM (soft bokeh circles, dark) =====
-function bloom(p){
-  const pal = BLOOM[CFG.seed % BLOOM.length];
-  for(let i=0;i<70;i++){
-    const x=p.random(W), y=p.random(H), r=p.random(30,200);
-    const c = pal[CFG.seed % pal.length];
-    for(let j=0;j<24;j++){
-      p.fill(c[0],c[1],c[2], 4);
-      p.ellipse(x,y, r-j*2, r-j*2);
-    }
-  }
-}
-
-// ===== 7. WAVES (smooth ribbons) =====
-function waves(p){
-  const pal = WAVE[CFG.seed % WAVE.length];
-  p.noFill();
-  for(let i=0;i<36;i++){
-    const c = pal[i % pal.length];
-    p.stroke(c[0],c[1],c[2], 160);
-    p.strokeWeight(2.4);
-    p.beginShape();
-    for(let x=0;x<=W;x+=10){
-      const y = i*52 + p.sin(x*0.005 + i*0.35 + CFG.seed*0.01)*80 + p.noise(x*0.004,i*0.2)*60;
-      p.vertex(x,y);
-    }
-    p.endShape();
-  }
-}
-
-// ===== helpers =====
-function lerp(p,a,b,t){ return a+(b-a)*t; }
-function grain(p, amt){
-  p.loadPixels();
-  for(let i=0;i<p.pixels.length;i+=4){
-    const n=(Math.random()-0.5)*amt;
-    p.pixels[i]+=n; p.pixels[i+1]+=n; p.pixels[i+2]+=n;
-  }
-  p.updatePixels();
-}
-
-// ===== palettes (clean, phone-friendly) =====
-const AESTHETIC = [
-  [[255,138,0],[255,45,126],[255,210,120]],
-  [[0,212,170],[0,102,255],[120,255,230]],
-  [[124,58,237],[219,39,119],[200,140,255]],
-  [[245,158,11],[239,68,68],[255,220,150]],
-  [[6,182,212],[59,130,246],[180,240,255]],
-  [[236,72,153],[139,92,246],[255,180,230]],
-  [[16,185,129],[5,150,105],[140,255,210]],
-  [[99,102,241],[236,72,153],[190,200,255]]
-];
-const SOFT = [
-  [[0,212,170],[0,102,255]],
-  [[255,138,0],[255,45,126]],
-  [[124,58,237],[236,72,153]],
-  [[16,185,129],[45,212,191]],
-  [[59,130,246],[99,102,241]]
-];
-const MESH = [
-  [[0,212,170],[0,102,255],[124,58,237],[255,45,126],[255,210,120]],
-  [[255,138,0],[255,45,126],[124,58,237],[0,212,170],[59,130,246]],
-  [[236,72,153],[139,92,246],[0,255,231],[255,138,0],[99,102,241]]
-];
-const PHOTO = [
-  [[255,180,120],[120,80,160],[255,230,180],[20,16,40]],
-  [[120,180,255],[40,80,140],[255,240,200],[10,20,40]],
-  [[255,140,100],[100,60,120],[255,220,160],[15,12,30]]
-];
-const BLOOM = [
-  [[0,212,170],[255,138,0],[124,58,237]],
-  [[255,45,126],[0,255,231],[255,210,120]],
-  [[99,102,241],[236,72,153],[16,185,129]]
-];
-const WAVE = [
-  [[0,212,170],[0,102,255],[120,255,230]],
-  [[255,138,0],[255,45,126],[255,210,120]],
-  [[124,58,237],[236,72,153],[200,140,255]]
-];
-
-// ===== actions =====
-function downloadPNG(){ if(window._p5) window._p5.saveCanvas('wallify_'+CFG.cat+'_'+CFG.seed,'png'); }
+function aesthetic(p){const pal=AESTHETIC[CFG.seed%AESTHETIC.length];const g=p.createGraphics(W,H);g.noStroke();
+  for(let y=0;y<H;y++){const t=y/H;g.fill(lerp(p,pal[0][0],pal[1][0],t),lerp(p,pal[0][1],pal[1][1],t),lerp(p,pal[0][2],pal[1][2],t));g.rect(0,y,W,1);}
+  const gx=W*0.7,gy=H*0.22;for(let i=0;i<80;i++){g.fill(pal[2][0],pal[2][1],pal[2][2],2.2);g.ellipse(gx,gy,620-i*7,620-i*7);}
+  p.image(g,0,0);grain(p,10);}
+function aurora(p){p.noStroke();for(let i=0;i<140;i++){const t=i/140;const y=t*H;const col=auroraColor(p,t);
+  p.fill(col[0],col[1],col[2],5);p.beginShape();for(let x=0;x<=W;x+=20){const yy=y+p.sin(x*0.004+CFG.seed+i*0.05)*60+p.noise(x*0.003,i*0.1)*100;p.vertex(x,yy);}p.vertex(W,H);p.vertex(0,H);p.endShape(p.CLOSE);}}
+function auroraColor(p,t){const sets=[[124,58,237],[236,72,153],[37,99,235],[0,255,231],[255,138,0]];const a=sets[CFG.seed%sets.length];const b=sets[(CFG.seed+2)%sets.length];return[lerp(p,a[0],b[0],t),lerp(p,a[1],b[1],t),lerp(p,a[2],b[2],t)];}
+function softGen(p){const pal=SOFT[CFG.seed%SOFT.length];p.strokeWeight(1.4);for(let n=0;n<900;n++){let x=p.random(W),y=p.random(H);const c=p.lerpColor(p.color(pal[0]),p.color(pal[1]),p.random());p.stroke(c.levels[0],c.levels[1],c.levels[2],26);for(let s=0;s<18;s++){const a=p.noise(x*0.0022,y*0.0022,CFG.seed*0.02)*p.TWO_PI*2;const nx=x+Math.cos(a)*7,ny=y+Math.sin(a)*7;p.line(x,y,nx,ny);x=nx;y=ny;if(x<0||x>W||y<0||y>H)break;}}}
+function mesh(p){const pal=MESH[CFG.seed%MESH.length];const g=p.createGraphics(W,H);g.noStroke();g.background(0);const pts=[[0.2,0.25],[0.8,0.3],[0.5,0.7],[0.25,0.85],[0.8,0.8]];for(let layer=0;layer<5;layer++){const c=pal[layer%pal.length];const[fx,fy]=pts[layer];for(let i=0;i<70;i++){g.fill(c[0],c[1],c[2],3);g.ellipse(fx*W,fy*H,760-i*10,760-i*10);}}p.image(g,0,0);p.blendMode(p.SCREEN);p.noStroke();p.fill(255,255,255,8);p.rect(0,0,W,H);p.blendMode(p.BLEND);grain(p,8);}
+function photoStyle(p){const pal=PHOTO[CFG.seed%PHOTO.length];for(let y=0;y<H*0.62;y++){const t=y/(H*0.62);p.stroke(lerp(p,pal[0][0],pal[1][0],t),lerp(p,pal[0][1],pal[1][1],t),lerp(p,pal[0][2],pal[1][2],t));p.line(0,y,W,y);}p.noStroke();const sx=W*0.5,sy=H*0.42;for(let i=0;i<60;i++){p.fill(pal[2][0],pal[2][1],pal[2][2],3);p.ellipse(sx,sy,360-i*5,360-i*5);}p.fill(pal[3][0],pal[3][1],pal[3][2]);p.beginShape();p.vertex(0,H*0.62);let mx=0;while(mx<W){const h=H*0.62+p.random(-90,90);p.vertex(mx,h);mx+=W/8;}p.vertex(W,H);p.vertex(0,H);p.endShape(p.CLOSE);p.fill(pal[3][0]*0.5,pal[3][1]*0.5,pal[3][2]*0.5,120);p.rect(0,H*0.62,W,H*0.38);}
+function bloom(p){const pal=BLOOM[CFG.seed%BLOOM.length];for(let i=0;i<70;i++){const x=p.random(W),y=p.random(H),r=p.random(30,200);const c=pal[CFG.seed%pal.length];for(let j=0;j<24;j++){p.fill(c[0],c[1],c[2],4);p.ellipse(x,y,r-j*2,r-j*2);}}}
+function waves(p){const pal=WAVE[CFG.seed%WAVE.length];p.noFill();for(let i=0;i<36;i++){const c=pal[i%pal.length];p.stroke(c[0],c[1],c[2],160);p.strokeWeight(2.4);p.beginShape();for(let x=0;x<=W;x+=10){const y=i*52+p.sin(x*0.005+i*0.35+CFG.seed*0.01)*80+p.noise(x*0.004,i*0.2)*60;p.vertex(x,y);}p.endShape();}}
+function lerp(p,a,b,t){return a+(b-a)*t;}
+function grain(p,amt){p.loadPixels();for(let i=0;i<p.pixels.length;i+=4){const n=(Math.random()-0.5)*amt;p.pixels[i]+=n;p.pixels[i+1]+=n;p.pixels[i+2]+=n;}p.updatePixels();}
+const AESTHETIC=[[[255,138,0],[255,45,126],[255,210,120]],[[124,58,237],[37,99,235],[120,255,230]],[[124,58,237],[236,72,153],[200,140,255]],[[245,158,11],[239,68,68],[255,220,150]],[[6,182,212],[59,130,246],[180,240,255]],[[236,72,153],[139,92,246],[255,180,230]],[[16,185,129],[5,150,105],[140,255,210]],[[99,102,241],[236,72,153],[190,200,255]]];
+const SOFT=[[[124,58,237],[37,99,235]],[[255,138,0],[236,72,153]],[[236,72,153],[124,58,237]],[[16,185,129],[45,212,191]],[[59,130,246],[99,102,241]]];
+const MESH=[[[124,58,237],[37,99,235],[236,72,153],[255,138,0],[59,130,246]],[[255,138,0],[236,72,153],[124,58,237],[0,212,170],[99,102,241]],[[236,72,153],[139,92,246],[0,255,231],[255,138,0],[99,102,241]]];
+const PHOTO=[[[255,180,120],[120,80,160],[255,230,180],[20,16,40]],[[120,180,255],[40,80,140],[255,240,200],[10,20,40]],[[255,140,100],[100,60,120],[255,220,160],[15,12,30]]];
+const BLOOM=[[[124,58,237],[255,138,0],[236,72,153]],[[236,72,153],[0,255,231],[255,210,120]],[[99,102,241],[236,72,153],[16,185,129]]];
+const WAVE=[[[124,58,237],[37,99,235],[120,255,230]],[[255,138,0],[236,72,153],[255,210,120]],[[236,72,153],[124,58,237],[200,140,255]]];
+function downloadPNG(){if(window._p5)window._p5.saveCanvas('wallify_'+CFG.cat+'_'+CFG.seed,'png');}
 let savedCount=0;
-function saveToGallery(){
-  const cv=document.querySelector('#p5holder canvas'); if(!cv) return;
-  const url=cv.toDataURL('image/png');
-  const grid=document.getElementById('saved');
-  if(savedCount===0) grid.innerHTML='';
-  const d=document.createElement('div'); d.className='gcard';
-  d.innerHTML=`<img src="${url}" alt="saved">`;
-  d.onclick=()=>{const a=document.createElement('a');a.href=url;a.download='wallify.png';a.click();};
-  grid.prepend(d); savedCount++;
+function saveToGallery(){const cv=document.querySelector('#p5holder canvas');if(!cv)return;const url=cv.toDataURL('image/png');const grid=document.getElementById('saved');const d=document.createElement('div');d.className='card';d.style.aspectRatio='9/16';d.innerHTML=`<img src="${url}" alt="saved">`;d.onclick=()=>{const a=document.createElement('a');a.href=url;a.download='wallify.png';a.click();};grid.prepend(d);savedCount++;}
+
+/* ===================== GALLERY ===================== */
+const DATA = {"categories":{"abstract":["assets/abstract_06244.png","assets/abstract_14163.png","assets/abstract_22082.png","assets/abstract_30001.png","assets/abstract_37920.png","assets/abstract_45839.png","assets/abstract_53758.png","assets/abstract_61677.png","assets/abstract_65604.png","assets/abstract_69596.png","assets/abstract_77515.png","assets/abstract_85434.png","assets/abstract_93353.png"],"bokeh":["assets/bokeh_00795.png","assets/bokeh_08714.png","assets/bokeh_16633.png","assets/bokeh_24552.png","assets/bokeh_32471.png","assets/bokeh_40390.png","assets/bokeh_48309.png","assets/bokeh_56228.png","assets/bokeh_59898.png","assets/bokeh_64147.png","assets/bokeh_72066.png","assets/bokeh_79985.png","assets/bokeh_87904.png"],"dark":["assets/dark_06006.png","assets/dark_13925.png","assets/dark_21844.png","assets/dark_29763.png","assets/dark_37682.png","assets/dark_45601.png","assets/dark_53520.png","assets/dark_61439.png","assets/dark_69358.png","assets/dark_77277.png","assets/dark_85196.png","assets/dark_93115.png","assets/dark_97088.png"],"flow":["assets/flow_04188.png","assets/flow_12107.png","assets/flow_20026.png","assets/flow_27945.png","assets/flow_35864.png","assets/flow_43783.png","assets/flow_51702.png","assets/flow_59621.png","assets/flow_67540.png","assets/flow_75459.png","assets/flow_83378.png","assets/flow_91297.png","assets/flow_99216.png"],"geometric":["assets/geometric_02017.png","assets/geometric_09936.png","assets/geometric_17855.png","assets/geometric_25774.png","assets/geometric_33693.png","assets/geometric_41612.png","assets/geometric_49531.png","assets/geometric_57450.png","assets/geometric_65369.png","assets/geometric_73288.png","assets/geometric_81207.png","assets/geometric_89126.png","assets/geometric_97045.png"],"gradient":["assets/gradient_01130.png","assets/gradient_09049.png","assets/gradient_16968.png","assets/gradient_24887.png","assets/gradient_32806.png","assets/gradient_40725.png","assets/gradient_48644.png","assets/gradient_56563.png","assets/gradient_64482.png","assets/gradient_72401.png","assets/gradient_80320.png","assets/gradient_88239.png","assets/gradient_96158.png"],"marble":["assets/marble_00351.png","assets/marble_08270.png","assets/marble_16189.png","assets/marble_24108.png","assets/marble_32027.png","assets/marble_39946.png","assets/marble_47865.png","assets/marble_55784.png","assets/marble_63703.png","assets/marble_71622.png","assets/marble_79541.png","assets/marble_87460.png","assets/marble_95379.png"],"minimal":["assets/minimal_01472.png","assets/minimal_09391.png","assets/minimal_17310.png","assets/minimal_25229.png","assets/minimal_33148.png","assets/minimal_41067.png","assets/minimal_48986.png","assets/minimal_56905.png","assets/minimal_64824.png","assets/minimal_72743.png","assets/minimal_80662.png","assets/minimal_88581.png","assets/minimal_96500.png"],"nature":["assets/nature_02693.png","assets/nature_10612.png","assets/nature_18531.png","assets/nature_26450.png","assets/nature_34369.png","assets/nature_42288.png","assets/nature_50207.png","assets/nature_58126.png","assets/nature_66045.png","assets/nature_73964.png","assets/nature_81883.png","assets/nature_89802.png","assets/nature_97721.png"],"neon":["assets/neon_05593.png","assets/neon_13512.png","assets/neon_21431.png","assets/neon_29350.png","assets/neon_37269.png","assets/neon_45188.png","assets/neon_53107.png","assets/neon_61026.png","assets/neon_68945.png","assets/neon_72690.png","assets/neon_80609.png","assets/neon_88528.png","assets/neon_96447.png"]},"total":130};
+const galleryGrid=document.getElementById('galleryGrid');
+const filters=document.getElementById('filters');
+const ALL='all';
+let activeCat=ALL;
+function buildFilters(){
+  const cats=[ALL,...Object.keys(DATA.categories)];
+  filters.innerHTML=cats.map(c=>`<button class="${c===ALL?'active':''}" data-cat="${c}">${c==='all'?'All':c}</button>`).join('');
+  filters.querySelectorAll('button').forEach(b=>b.onclick=()=>{
+    filters.querySelectorAll('button').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');activeCat=b.dataset.cat;renderGallery();
+  });
 }
+function renderGallery(){
+  const list = activeCat===ALL
+    ? Object.values(DATA.categories).flat()
+    : DATA.categories[activeCat]||[];
+  galleryGrid.innerHTML=list.map(src=>`<div class="card" onclick="openModal('${src}')">
+    <span class="tag">${activeCat===ALL?src.split('/').pop().split('_')[0]:activeCat}</span>
+    <img loading="lazy" src="${src}" alt="wallpaper">
+    <a class="dl" href="${src}" download onclick="event.stopPropagation()">⬇</a></div>`).join('');
+}
+function openModal(src){document.getElementById('modalImg').src=src;document.getElementById('modal').classList.add('open');}
+function closeModal(){document.getElementById('modal').classList.remove('open');}
+document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal();});
+buildFilters();renderGallery();
 </script>
 </body>
 </html>
