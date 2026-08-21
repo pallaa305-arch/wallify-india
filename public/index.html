@@ -3,52 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wallify India — Live Generative Wallpapers (Dynamic)</title>
-<meta name="description" content="Generate unlimited unique HD wallpapers live in your browser. Black-background generative art. Download instantly. Free, no signup.">
-<meta name="keywords" content="live wallpaper generator, generative wallpaper, black wallpaper, dynamic wallpaper, free wallpaper maker, AI wallpaper">
-<meta property="og:title" content="Wallify India — Live Generative Wallpapers">
-<meta property="og:description" content="Generate unlimited unique HD wallpapers live. Pure black aesthetic. Instant download.">
+<title>Wallify India — Beautiful Live Wallpapers (Dynamic)</title>
+<meta name="description" content="Generate stunning HD wallpapers live: clean aesthetic gradients, soft generative art, and photo-style renders. Pure black base. Free download.">
+<meta name="keywords" content="beautiful wallpaper, aesthetic gradient, phone wallpaper, live wallpaper maker, black wallpaper, generative art, free wallpaper download">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <script>p5.disableFriendlyErrors = true;</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.3/p5.min.js"></script>
 <style>
   :root{
-    --bg:#000000;--panel:#0a0a0a;--line:#1a1a1a;--txt:#fff;--mut:#777;
+    --bg:#000;--panel:#0a0a0a;--line:#1c1c1c;--txt:#fff;--mut:#777;
     --accent:#00d4aa;--accent2:#ff8a00;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{background:#000;color:#fff;font-family:'Inter',system-ui,sans-serif;overflow-x:hidden}
   h1,h2,h3,.logo{font-family:'Space Grotesk',sans-serif}
   a{color:inherit;text-decoration:none}
-  /* Nav */
   nav{display:flex;align-items:center;justify-content:space-between;padding:16px 26px;position:sticky;top:0;z-index:30;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
   .logo{font-size:1.35rem;font-weight:700;display:flex;align-items:center;gap:8px}
   .logo .dot{width:11px;height:11px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2))}
-  /* Stage */
   .stage{max-width:520px;margin:26px auto 0;padding:0 16px}
   .canvas-wrap{position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:#000;aspect-ratio:9/16;box-shadow:0 20px 60px rgba(0,0,0,.8)}
   .canvas-wrap canvas{display:block;width:100%!important;height:100%!important}
-  .seedtag{position:absolute;top:12px;left:12px;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);padding:5px 12px;border-radius:20px;font-size:.72rem;color:var(--accent);border:1px solid #222}
-  /* Controls */
+  .seedtag{position:absolute;top:12px;left:12px;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);padding:5px 12px;border-radius:20px;font-size:.72rem;color:var(--accent);border:1px solid #222;z-index:5}
   .controls{max-width:520px;margin:18px auto;padding:0 16px;display:flex;flex-direction:column;gap:14px}
   .cats{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
   .cats button{padding:9px 15px;border-radius:20px;border:1px solid var(--line);background:var(--panel);color:var(--mut);cursor:pointer;font-size:.82rem;transition:.16s}
   .cats button.active,.cats button:hover{border-color:var(--accent);color:var(--accent)}
-  .actions{display:flex;gap:12px;justify-content:center}
-  .btn{padding:13px 24px;border-radius:12px;border:none;font-weight:700;font-size:.95rem;cursor:pointer;transition:.18s;font-family:'Inter'}
+  .actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .btn{padding:13px 22px;border-radius:12px;border:none;font-weight:700;font-size:.93rem;cursor:pointer;transition:.18s;font-family:'Inter'}
   .btn.gen{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#000}
   .btn.gen:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(255,138,0,.3)}
   .btn.dl{background:#111;color:#fff;border:1px solid #333}
   .btn.dl:hover{border-color:var(--accent);color:var(--accent)}
   .hint{text-align:center;color:var(--mut);font-size:.8rem;margin-top:4px}
-  /* Gallery of saved (session) */
-  .gallery{max-width:1100px;margin:40px auto;padding:0 20px}
-  .gallery h2{font-size:1.2rem;margin-bottom:16px;text-align:center;color:#aaa}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
-  .gcard{border-radius:12px;overflow:hidden;border:1px solid var(--line);aspect-ratio:9/16;cursor:pointer;transition:.18s}
-  .gcard:hover{border-color:var(--accent);transform:translateY(-3px)}
-  .gcard img{width:100%;height:100%;object-fit:cover}
   .ad{text-align:center;margin:30px auto;max-width:1100px;padding:18px;background:#0a0a0a;border:1px dashed #222;border-radius:12px;color:#555;font-size:.8rem}
   footer{text-align:center;padding:40px 20px;color:#555;font-size:.83rem;border-top:1px solid var(--line);margin-top:30px}
   footer a{color:var(--accent)}
@@ -69,12 +57,12 @@
 
 <div class="controls">
   <div class="cats" id="cats">
-    <button class="active" data-cat="flow">Flow</button>
-    <button data-cat="neon">Neon</button>
-    <button data-cat="minimal">Minimal</button>
-    <button data-cat="particles">Particles</button>
-    <button data-cat="marble">Marble</button>
-    <button data-cat="geo">Geometric</button>
+    <button class="active" data-cat="aesthetic">Aesthetic</button>
+    <button data-cat="aurora">Aurora</button>
+    <button data-cat="soft">Soft Gen</button>
+    <button data-cat="mesh">Mesh</button>
+    <button data-cat="photo">Photo-style</button>
+    <button data-cat="bloom">Bloom</button>
     <button data-cat="waves">Waves</button>
   </div>
   <div class="actions">
@@ -82,16 +70,10 @@
     <button class="btn dl" onclick="downloadPNG()">⬇ Download HD</button>
     <button class="btn dl" onclick="saveToGallery()">★ Save</button>
   </div>
-  <div class="hint">Har generate par 100% unique wallpaper · pure black base · mobile 1080×1920</div>
+  <div class="hint">Clean · Beautiful · Pure black base · mobile 1080×1920 · har generate par unique</div>
 </div>
 
 <div class="ad">[ Advertisement — AdSense auto-ads ]</div>
-
-<div class="gallery">
-  <h2>★ Saved This Session</h2>
-  <div class="grid" id="saved"><div style="color:#444;grid-column:1/-1;text-align:center;padding:20px">Kuch nahi save kiya abhi — "Save" dabao</div></div>
-</div>
-
 <div class="ad">[ Advertisement — AdSense auto-ads ]</div>
 
 <footer>
@@ -100,219 +82,246 @@
 </footer>
 
 <script>
-// ===== CONFIG =====
 const W = 1080, H = 1920;
-let CFG = { seed: Math.floor(Math.random()*99999), cat: 'flow', t: 0 };
+let CFG = { seed: Math.floor(Math.random()*999999), cat: 'aesthetic' };
 const SEEDTAG = document.getElementById('seedtag');
 
-function newSeed(){ CFG.seed = Math.floor(Math.random()*999999); redrawLive(); }
+function newSeed(){ CFG.seed = Math.floor(Math.random()*9999999); redrawLive(); }
 function setCat(c){ CFG.cat = c; redrawLive(); }
-
 function redrawLive(){
   SEEDTAG.textContent = 'seed: ' + CFG.seed;
-  if(window._p5 && window._p5.redraw){ window._p5.redraw(); }
+  if(window._p5 && window._p5.redraw) window._p5.redraw();
 }
-
 document.querySelectorAll('#cats button').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('#cats button').forEach(x=>x.classList.remove('active'));
   b.classList.add('active'); setCat(b.dataset.cat);
 });
 
-// ===== p5 instance =====
 const sketch = (p) => {
   p.setup = () => {
-    const c = p.createCanvas(W, H);
-    c.parent('p5holder');
-    p.pixelDensity(1);
-    p.noLoop();
-    window._p5 = p;
-    redrawLive();
+    const c = p.createCanvas(W, H); c.parent('p5holder');
+    p.pixelDensity(1); p.noLoop(); window._p5 = p; redrawLive();
   };
   p.draw = () => renderScene(p);
 };
 new p5(sketch);
 
-// ===== RENDER ENGINE (black bg, generative) =====
 function renderScene(p){
   p.randomSeed(CFG.seed); p.noiseSeed(CFG.seed);
   p.colorMode(p.RGB, 255);
-  p.background(0); // PURE BLACK — no blueish
+  p.background(0);
   const cat = CFG.cat;
-  if(cat==='flow') flowField(p);
-  else if(cat==='neon') neonGrid(p);
-  else if(cat==='minimal') minimal(p);
-  else if(cat==='particles') particles(p);
-  else if(cat==='marble') marble(p);
-  else if(cat==='geo') geometric(p);
+  if(cat==='aesthetic') aesthetic(p);
+  else if(cat==='aurora') aurora(p);
+  else if(cat==='soft') softGen(p);
+  else if(cat==='mesh') mesh(p);
+  else if(cat==='photo') photoStyle(p);
+  else if(cat==='bloom') bloom(p);
   else if(cat==='waves') waves(p);
-  // subtle vignette for depth
-  p.noFill();
-  for(let i=0;i<60;i++){
-    p.stroke(0,0,0, i*0.6);
-    p.strokeWeight(2);
-    p.rect(i, i, W-2*i, H-2*i);
-  }
 }
 
-// --- Flow field ---
-function flowField(p){
-  const cols = pickPalette(p);
-  p.strokeWeight(1.2);
-  for(let n=0;n<2600;n++){
-    let x = p.random(W), y = p.random(H);
-    const c = p.lerpColor(p.color(cols[0]), p.color(cols[1]), p.random());
-    p.stroke(c.levels[0], c.levels[1], c.levels[2], 120);
-    for(let s=0;s<26;s++){
-      const a = p.noise(x*0.0016, y*0.0016, CFG.seed*0.01)*p.TWO_PI*2;
-      const nx = x + Math.cos(a)*5.5, ny = y + Math.sin(a)*5.5;
+// ===== 1. CLEAN AESTHETIC GRADIENT (diagonal, smooth, soft glow) =====
+function aesthetic(p){
+  const pal = AESTHETIC[CFG.seed % AESTHETIC.length];
+  const g = p.createGraphics(W,H);
+  g.noStroke();
+  for(let y=0;y<H;y++){
+    const t = y/H;
+    const r = lerp(p, pal[0][0], pal[1][0], t);
+    const gg = lerp(p, pal[0][1], pal[1][1], t);
+    const b = lerp(p, pal[0][2], pal[1][2], t);
+    g.fill(r,gg,b); g.rect(0,y,W,1);
+  }
+  // soft glow blob top-right
+  const gx = W*0.7, gy = H*0.22;
+  for(let i=0;i<80;i++){
+    g.fill(pal[2][0],pal[2][1],pal[2][2], 2.2);
+    g.ellipse(gx, gy, 620-i*7, 620-i*7);
+  }
+  p.image(g,0,0);
+  // subtle grain
+  grain(p, 10);
+}
+
+// ===== 2. AURORA (soft flowing bands, dark base) =====
+function aurora(p){
+  p.noStroke();
+  for(let i=0;i<140;i++){
+    const t = i/140;
+    const y = t*H;
+    const col = auroraColor(p, t);
+    p.fill(col[0], col[1], col[2], 5);
+    p.beginShape();
+    for(let x=0;x<=W;x+=20){
+      const yy = y + p.sin(x*0.004 + CFG.seed + i*0.05)*60 + p.noise(x*0.003, i*0.1)*100;
+      p.vertex(x, yy);
+    }
+    p.vertex(W, H); p.vertex(0, H); p.endShape(p.CLOSE);
+  }
+}
+function auroraColor(p, t){
+  const sets = [[0,212,170],[124,58,237],[0,102,255],[255,0,170],[0,255,231]];
+  const a = sets[CFG.seed % sets.length];
+  const b = sets[(CFG.seed+2) % sets.length];
+  return [lerp(p,a[0],b[0],t), lerp(p,a[1],b[1],t), lerp(p,a[2],b[2],t)];
+}
+
+// ===== 3. SOFT GENERATIVE (gentle flow, low opacity, calm) =====
+function softGen(p){
+  const pal = SOFT[CFG.seed % SOFT.length];
+  p.strokeWeight(1.4);
+  for(let n=0;n<900;n++){
+    let x=p.random(W), y=p.random(H);
+    const c = p.lerpColor(p.color(pal[0]), p.color(pal[1]), p.random());
+    p.stroke(c.levels[0],c.levels[1],c.levels[2], 26);
+    for(let s=0;s<18;s++){
+      const a = p.noise(x*0.0022, y*0.0022, CFG.seed*0.02)*p.TWO_PI*2;
+      const nx=x+Math.cos(a)*7, ny=y+Math.sin(a)*7;
       p.line(x,y,nx,ny); x=nx; y=ny;
       if(x<0||x>W||y<0||y>H) break;
     }
   }
 }
 
-// --- Neon grid ---
-function neonGrid(p){
-  const cols = pickPalette(p);
-  p.noFill();
-  const off = CFG.seed % 100;
-  for(let gx=0; gx<W; gx+=70){
-    for(let gy=0; gy<H; gy+=70){
-      const c = p.lerpColor(p.color(cols[0]), p.color(cols[1]), (gx+gy)/(W+H));
-      p.stroke(c.levels[0],c.levels[1],c.levels[2], 90 + (gx+gy)%120);
-      p.strokeWeight(1.5);
-      const r = 18 + (p.noise(gx*0.01, gy*0.01, CFG.seed)*30);
-      p.ellipse(gx+35, gy+35, r, r);
+// ===== 4. MESH GRADIENT (multi radial, premium) =====
+function mesh(p){
+  const pal = MESH[CFG.seed % MESH.length];
+  const g = p.createGraphics(W,H); g.noStroke();
+  g.background(0);
+  const pts = [[0.2,0.25],[0.8,0.3],[0.5,0.7],[0.25,0.85],[0.8,0.8]];
+  for(let layer=0;layer<5;layer++){
+    const c = pal[layer % pal.length];
+    const [fx,fy] = pts[layer];
+    // blur via stacked ellipses
+    for(let i=0;i<70;i++){
+      g.fill(c[0],c[1],c[2], 3);
+      g.ellipse(fx*W, fy*H, 760-i*10, 760-i*10);
     }
   }
-  // glow lines
-  for(let i=0;i<8;i++){
-    const c = p.lerpColor(p.color(cols[0]), p.color(cols[1]), i/8);
-    p.stroke(c.levels[0],c.levels[1],c.levels[2], 200);
-    p.strokeWeight(2);
-    p.line(0, off+i*200, W, off+i*200+200);
-  }
+  p.image(g,0,0);
+  p.blendMode(p.SCREEN);
+  p.noStroke();
+  p.fill(255,255,255,8); p.rect(0,0,W,H);
+  p.blendMode(p.BLEND);
+  grain(p, 8);
 }
 
-// --- Minimal ---
-function minimal(p){
-  const cols = pickPalette(p);
-  const c = p.color(cols[1]);
-  const shape = CFG.seed % 3;
-  if(shape===0){ p.noFill(); p.stroke(c.levels[0],c.levels[1],c.levels[2],230); p.strokeWeight(3);
-    p.ellipse(W/2, H*0.42, 420, 420); }
-  else if(shape===1){ p.noStroke(); p.fill(c.levels[0],c.levels[1],c.levels[2],220);
-    p.rect(W/2-3, 300, 6, H*0.55); }
-  else { p.noFill(); p.stroke(c.levels[0],c.levels[1],c.levels[2],220); p.strokeWeight(4);
-    p.arc(140, 700, W-280, W-280, 0.3, p.PI-0.3); }
-  // tiny accent dot
-  p.fill(c.levels[0],c.levels[1],c.levels[2], 255);
-  p.noStroke(); p.ellipse(W/2, H*0.42, 16, 16);
+// ===== 5. PHOTO-STYLE (mountains/lake silhouette, dusk) =====
+function photoStyle(p){
+  const pal = PHOTO[CFG.seed % PHOTO.length];
+  // sky gradient
+  for(let y=0;y<H*0.62;y++){
+    const t=y/(H*0.62);
+    p.stroke(lerp(p,pal[0][0],pal[1][0],t), lerp(p,pal[0][1],pal[1][1],t), lerp(p,pal[0][2],pal[1][2],t));
+    p.line(0,y,W,y);
+  }
+  // sun
+  p.noStroke();
+  const sx=W*0.5, sy=H*0.42;
+  for(let i=0;i<60;i++){ p.fill(pal[2][0],pal[2][1],pal[2][2], 3); p.ellipse(sx,sy, 360-i*5, 360-i*5); }
+  // mountains
+  p.fill(pal[3][0],pal[3][1],pal[3][2]);
+  p.beginShape(); p.vertex(0,H*0.62);
+  let mx=0;
+  while(mx<W){ const h=H*0.62 + p.random(-90,90); p.vertex(mx, h); mx+= W/8; }
+  p.vertex(W,H); p.vertex(0,H); p.endShape(p.CLOSE);
+  // reflection
+  p.fill(pal[3][0]*0.5,pal[3][1]*0.5,pal[3][2]*0.5, 120);
+  p.rect(0,H*0.62,W,H*0.38);
 }
 
-// --- Particles ---
-function particles(p){
-  const cols = pickPalette(p);
-  const N = 520;
-  for(let i=0;i<N;i++){
-    const x = p.random(W), y = p.random(H);
-    const c = p.lerpColor(p.color(cols[0]), p.color(cols[1]), p.random());
-    p.noStroke(); p.fill(c.levels[0],c.levels[1],c.levels[2], 200);
-    const s = p.random(1.5, 5);
-    p.ellipse(x, y, s, s);
-  }
-  // connecting threads
-  p.stroke(255,40); p.strokeWeight(1);
-  for(let i=0;i<60;i++){
-    const x1=p.random(W),y1=p.random(H),x2=p.random(W),y2=p.random(H);
-    if(p.dist(x1,y1,x2,y2)<260) p.line(x1,y1,x2,y2);
-  }
-}
-
-// --- Marble (noise veins) ---
-function marble(p){
-  const cols = pickPalette(p);
-  p.loadPixels();
-  const base = p.color(cols[0]); const hi = p.color(cols[1]);
-  for(let y=0;y<H;y+=2){
-    for(let x=0;x<W;x+=2){
-      let v = 0;
-      v += p.noise(x*0.002, y*0.002, CFG.seed*0.1);
-      v += 0.5*p.noise(x*0.006, y*0.006, CFG.seed*0.2);
-      const t = p.constrain(v,0,1);
-      const r = p.lerp(base.levels[0], hi.levels[0], t);
-      const g = p.lerp(base.levels[1], hi.levels[1], t);
-      const b = p.lerp(base.levels[2], hi.levels[2], t);
-      for(let dy=0;dy<2;dy++)for(let dx=0;dx<2;dx++){
-        const idx = 4*((y+dy)*W + (x+dx));
-        p.pixels[idx]=r; p.pixels[idx+1]=g; p.pixels[idx+2]=b; p.pixels[idx+3]=255;
-      }
+// ===== 6. BLOOM (soft bokeh circles, dark) =====
+function bloom(p){
+  const pal = BLOOM[CFG.seed % BLOOM.length];
+  for(let i=0;i<70;i++){
+    const x=p.random(W), y=p.random(H), r=p.random(30,200);
+    const c = pal[CFG.seed % pal.length];
+    for(let j=0;j<24;j++){
+      p.fill(c[0],c[1],c[2], 4);
+      p.ellipse(x,y, r-j*2, r-j*2);
     }
   }
-  p.updatePixels();
 }
 
-// --- Geometric ---
-function geometric(p){
-  const cols = pickPalette(p);
-  p.noFill();
-  for(let i=0;i<26;i++){
-    const c = p.lerpColor(p.color(cols[0]), p.color(cols[1]), i/26);
-    p.stroke(c.levels[0],c.levels[1],c.levels[2], 200);
-    p.strokeWeight(p.random(1,4));
-    const x = p.random(W), y = p.random(H), s = p.random(80, 360);
-    if(CFG.seed%2) p.triangle(x,y,x+s,y,x+s/2,y+s);
-    else p.rect(x,y,s,s);
-  }
-}
-
-// --- Waves ---
+// ===== 7. WAVES (smooth ribbons) =====
 function waves(p){
-  const cols = pickPalette(p);
+  const pal = WAVE[CFG.seed % WAVE.length];
   p.noFill();
-  for(let i=0;i<42;i++){
-    const c = p.lerpColor(p.color(cols[0]), p.color(cols[1]), i/42);
-    p.stroke(c.levels[0],c.levels[1],c.levels[2], 180);
-    p.strokeWeight(2.2);
+  for(let i=0;i<36;i++){
+    const c = pal[i % pal.length];
+    p.stroke(c[0],c[1],c[2], 160);
+    p.strokeWeight(2.4);
     p.beginShape();
-    for(let x=0;x<=W;x+=12){
-      const y = i*44 + p.sin(x*0.006 + i*0.3 + CFG.seed*0.01)*70;
-      p.vertex(x, y);
+    for(let x=0;x<=W;x+=10){
+      const y = i*52 + p.sin(x*0.005 + i*0.35 + CFG.seed*0.01)*80 + p.noise(x*0.004,i*0.2)*60;
+      p.vertex(x,y);
     }
     p.endShape();
   }
 }
 
-// ===== Palettes (black-friendly, vivid) =====
-function pickPalette(p){
-  const sets = {
-    flow:[ [0,212,170], [0,102,255] ],
-    neon:[ [255,0,200], [0,255,231] ],
-    minimal:[ [255,138,0], [255,255,255] ],
-    particles:[ [124,58,237], [0,212,170] ],
-    marble:[ [245,245,245], [218,165,32] ],
-    geo:[ [139,92,246], [56,189,248] ],
-    waves:[ [244,63,94], [245,158,11] ]
-  };
-  return sets[CFG.cat] || sets.flow;
+// ===== helpers =====
+function lerp(p,a,b,t){ return a+(b-a)*t; }
+function grain(p, amt){
+  p.loadPixels();
+  for(let i=0;i<p.pixels.length;i+=4){
+    const n=(Math.random()-0.5)*amt;
+    p.pixels[i]+=n; p.pixels[i+1]+=n; p.pixels[i+2]+=n;
+  }
+  p.updatePixels();
 }
 
-// ===== Actions =====
-function downloadPNG(){
-  if(window._p5) window._p5.saveCanvas('wallify_'+CFG.cat+'_'+CFG.seed, 'png');
-}
+// ===== palettes (clean, phone-friendly) =====
+const AESTHETIC = [
+  [[255,138,0],[255,45,126],[255,210,120]],
+  [[0,212,170],[0,102,255],[120,255,230]],
+  [[124,58,237],[219,39,119],[200,140,255]],
+  [[245,158,11],[239,68,68],[255,220,150]],
+  [[6,182,212],[59,130,246],[180,240,255]],
+  [[236,72,153],[139,92,246],[255,180,230]],
+  [[16,185,129],[5,150,105],[140,255,210]],
+  [[99,102,241],[236,72,153],[190,200,255]]
+];
+const SOFT = [
+  [[0,212,170],[0,102,255]],
+  [[255,138,0],[255,45,126]],
+  [[124,58,237],[236,72,153]],
+  [[16,185,129],[45,212,191]],
+  [[59,130,246],[99,102,241]]
+];
+const MESH = [
+  [[0,212,170],[0,102,255],[124,58,237],[255,45,126],[255,210,120]],
+  [[255,138,0],[255,45,126],[124,58,237],[0,212,170],[59,130,246]],
+  [[236,72,153],[139,92,246],[0,255,231],[255,138,0],[99,102,241]]
+];
+const PHOTO = [
+  [[255,180,120],[120,80,160],[255,230,180],[20,16,40]],
+  [[120,180,255],[40,80,140],[255,240,200],[10,20,40]],
+  [[255,140,100],[100,60,120],[255,220,160],[15,12,30]]
+];
+const BLOOM = [
+  [[0,212,170],[255,138,0],[124,58,237]],
+  [[255,45,126],[0,255,231],[255,210,120]],
+  [[99,102,241],[236,72,153],[16,185,129]]
+];
+const WAVE = [
+  [[0,212,170],[0,102,255],[120,255,230]],
+  [[255,138,0],[255,45,126],[255,210,120]],
+  [[124,58,237],[236,72,153],[200,140,255]]
+];
+
+// ===== actions =====
+function downloadPNG(){ if(window._p5) window._p5.saveCanvas('wallify_'+CFG.cat+'_'+CFG.seed,'png'); }
 let savedCount=0;
 function saveToGallery(){
-  const cv = document.querySelector('#p5holder canvas');
-  if(!cv) return;
-  const url = cv.toDataURL('image/png');
-  const grid = document.getElementById('saved');
+  const cv=document.querySelector('#p5holder canvas'); if(!cv) return;
+  const url=cv.toDataURL('image/png');
+  const grid=document.getElementById('saved');
   if(savedCount===0) grid.innerHTML='';
-  const d = document.createElement('div'); d.className='gcard';
-  d.innerHTML = `<img src="${url}" alt="saved">`;
-  d.onclick = ()=>{ const a=document.createElement('a'); a.href=url; a.download='wallify.png'; a.click(); };
-  grid.prepend(d);
-  savedCount++;
+  const d=document.createElement('div'); d.className='gcard';
+  d.innerHTML=`<img src="${url}" alt="saved">`;
+  d.onclick=()=>{const a=document.createElement('a');a.href=url;a.download='wallify.png';a.click();};
+  grid.prepend(d); savedCount++;
 }
 </script>
 </body>
