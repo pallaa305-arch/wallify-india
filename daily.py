@@ -12,7 +12,7 @@ import os, sys, time, json, shutil, subprocess
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-TOOLS = Path("C:/Users/Dell/AppData/Local/hermes/hermes-agent/tools")
+TOOLS = Path("C:/Users/Dell/websites/wallpapers")
 sys.path.insert(0, str(TOOLS))
 from generate_image import generate_image
 
