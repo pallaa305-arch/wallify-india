@@ -1348,5 +1348,17 @@
     "category": "superbikes_stunt",
     "w": 1080,
     "h": 1920
+  },
+  {
+    "file": "superbikes_025.jpg",
+    "category": "superbikes",
+    "w": 1080,
+    "h": 1920
+  },
+  {
+    "file": "nature_025.jpg",
+    "category": "nature",
+    "w": 1080,
+    "h": 1920
   }
 ]
