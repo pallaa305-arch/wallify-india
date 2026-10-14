@@ -1360,5 +1360,29 @@
     "category": "nature",
     "w": 1080,
     "h": 1920
+  },
+  {
+    "file": "superbikes_026.jpg",
+    "category": "superbikes",
+    "w": 1080,
+    "h": 1920
+  },
+  {
+    "file": "nature_026.jpg",
+    "category": "nature",
+    "w": 1080,
+    "h": 1920
+  },
+  {
+    "file": "anime_025.jpg",
+    "category": "anime",
+    "w": 1080,
+    "h": 1920
+  },
+  {
+    "file": "superbikes_stunt_010.jpg",
+    "category": "superbikes_stunt",
+    "w": 1080,
+    "h": 1920
   }
 ]
