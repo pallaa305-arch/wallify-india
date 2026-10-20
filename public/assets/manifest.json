@@ -1384,5 +1384,35 @@
     "category": "superbikes_stunt",
     "w": 1080,
     "h": 1920
+  },
+  {
+    "file": "superbikes_027.jpg",
+    "category": "superbikes",
+    "w": 1080,
+    "h": 1920
+  },
+  {
+    "file": "cars_025.jpg",
+    "category": "cars",
+    "w": 1080,
+    "h": 1920
+  },
+  {
+    "file": "nature_027.jpg",
+    "category": "nature",
+    "w": 1080,
+    "h": 1920
+  },
+  {
+    "file": "abstract_025.jpg",
+    "category": "abstract",
+    "w": 1080,
+    "h": 1920
+  },
+  {
+    "file": "cars_classic_025.jpg",
+    "category": "cars_classic",
+    "w": 1080,
+    "h": 1920
   }
 ]
