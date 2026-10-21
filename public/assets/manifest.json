@@ -1414,5 +1414,23 @@
     "category": "cars_classic",
     "w": 1080,
     "h": 1920
+  },
+  {
+    "file": "superbikes_028.jpg",
+    "category": "superbikes",
+    "w": 1080,
+    "h": 1920
+  },
+  {
+    "file": "space_025.jpg",
+    "category": "space",
+    "w": 1080,
+    "h": 1920
+  },
+  {
+    "file": "gaming_025.jpg",
+    "category": "gaming",
+    "w": 1080,
+    "h": 1920
   }
 ]
